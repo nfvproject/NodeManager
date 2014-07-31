@@ -325,13 +325,13 @@ class NodeManager:
              	self.savevmac(vmac)
              	return vmacs['mac']
 
-    def getvlanid(self):
-        vlanids = self.loadvlanid()
-        for vlanid in vlanids:
-             if vlanid['status'] == 'available':
-             	vlanid['status'] = 'used'
-             	self.savevlanid(vlanids)
-             	return vlanid['vlanid']
+   # def getvlanid(self):
+   #     vlanids = self.loadvlanid()
+   #     for vlanid in vlanids:
+   #          if vlanid['status'] == 'available':
+   #          	vlanid['status'] = 'used'
+   #          	self.savevlanid(vlanids)
+   #          	return vlanid['vlanid']
         
     def updaterouterid(self,id):
         router = self.loadrouterid()
@@ -352,12 +352,12 @@ class NodeManager:
             if vmacs['mac'] == mac:
                  vmacs['status'] = 'available'
                  self.savevmac(vmac)
-    def updatevlanid(self,vid):
-        vlanids = self.loadvlanid()
-        for vlanid in vlanids:
-            if  vlanid['vlanid'] == vid:
-                vlanid['status'] = 'available'
-                self.savevlanid(vlanids)
+   # def updatevlanid(self,vid):
+   #    vlanids = self.loadvlanid()
+   #     for vlanid in vlanids:
+   #         if  vlanid['vlanid'] == vid:
+   #             vlanid['status'] = 'available'
+   #             self.savevlanid(vlanids)
 
     def GetSlivers(self, config, plc):
         """Retrieves GetSlivers at PLC and triggers callbacks defined in modules/plugins"""
@@ -498,12 +498,12 @@ class NodeManager:
         f.close()
         logger.log_router(vmac,"This is writed to db")
    
-    def savevlanid (self, vid):
-        f = open(NodeManager.VLANID_FILE, "w")
-        logger.log ("nodemanager: saving successfully vlan id in %s" % NodeManager.VLANID_FILE)
-        pickle.dump(vid, f)
-        f.close()
-        logger.log_router(vid,"This is writed to db")
+    #def savevlanid (self, vid):
+    #    f = open(NodeManager.VLANID_FILE, "w")
+    #    logger.log ("nodemanager: saving successfully vlan id in %s" % NodeManager.VLANID_FILE)
+    #    pickle.dump(vid, f)
+    #    f.close()
+    #    logger.log_router(vid,"This is writed to db")
         
     def loadSlivers (self):
         try:
@@ -558,7 +558,7 @@ class NodeManager:
             vips = pickle.load(f)
             f.close()
             return vips
-        except:
+       except:
             logger.log("Could not restore vip from %s" % NodeManager.VIP_FILE)
             vips = []    
             
@@ -567,7 +567,7 @@ class NodeManager:
                 vip['ip'] = '192.168.122.'+str(i)
                 vip['status'] = 'available'
                 vips.append(vip)                
-            return vips
+          return vips
 
     def loadvmac(self):
         try:
@@ -591,7 +591,7 @@ class NodeManager:
                 vmac['status'] = 'available'
                 vmacs.append(vmac)
             return vmacs
-
+    '''
     def loadvlanid(self):
         try:
             f = open(NodeManager.VLANID_FILE, "r+")
@@ -609,7 +609,7 @@ class NodeManager:
                 vid['status'] = 'available'
                 vids.append(vid)
             return vids
-
+     '''
     def run(self):
         # make sure to create /etc/planetlab/virt so others can read that
         # used e.g. in vsys-scripts's sliceip
