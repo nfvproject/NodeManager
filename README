@@ -1,0 +1,42 @@
+The PlanetLab NodeManager manages all aspects of PlanetLab node and
+slice management once the node has been initialized and configured by
+the Boot Manager. It periodically contacts its management authority
+for configuration updates. It provides an XML-RPC API for performing
+local operations on slices.
+
+Copyright 2008 Princeton University
+http://www.planet-lab.org
+
+========================================
+--- NOTES on packaging
+
+we use the same codebase for vs-nodes and lxc-nodes
+common software gets shipped in nodemanager-lib, and specifics go in
+nodemanager-vs or nodemanager-lxc resp.
+
+we have chosen to keep the same historical layout for codebase,
+see setup-{lib,vs,lxc}.py for details of what goes where
+
+--- NOTES on debugging
+
+(*) service nm restartdebug
+this lets you restart the nodemanager in interactive mode, and with faster periods
+
+
+(*) logs
+logging is a bit confusing; the main recipient is 
+    /var/log/nodemanager
+
+[older notes, not sure thisis still relevant]
+but beware that part of the logs eventually end up in 
+    /vservers/<slicename>/var/log/nodemanager
+as well as in here (although this should not be used anymore by now)
+    /vservers/<slicename>/var/log/boot.log
+
+(*) connecting with PLC
+also, note that each time GetSlivers gets sucessfully fetched, it is saved in
+    /var/lib/nodemanager/getslivers.txt
+
+An effort was made so that the various pieces of nodemanager do not
+get called when connection with PLC is broken, however be aware that
+this might not be too robust and end up with red herrings
