@@ -11,14 +11,14 @@
 
 import optparse
 import time
-import xmlrpclib
-import socket
+#import xmlrpclib
+#import socket
 import os
 import sys
-import glob
+#import glob
 import pickle
 import random
-import resource
+#import resource
 
 import logger
 import tools
@@ -36,10 +36,11 @@ class NodeManager:
 
     MAP_FILE = "/var/lib/nodemanager/slicemap.pickle"
     
-    ROUTER_FILE = "/var/lib/nodemanager/router.pickle"
-    VIP_FILE = "/var/lib/nodemanager/vip.pickle"
-    VMAC_FILE = "/var/lib/nodemanager/vmac.pickle"
-    VLANID_FILE = "/var/lib/nodemanager/vlanid.pickle"
+    ROUTER_FILE = "/var/lib/myplc/router.pickle"
+    VSLIVER_FILE = "/var/lib/myplc/vsliver.pickle"
+    VIP_FILE = "/var/lib/myplc/vip.pickle"
+    VMAC_FILE = "/var/lib/myplc/vmac.pickle"
+    VLANID_FILE = "/var/lib/myplc/vlanid.pickle"
     PEARL_DPID = 1
     NODE_ID = 32
 
@@ -123,22 +124,35 @@ class NodeManager:
              slices = {}
              if sliver['slice_id'] > 4:
                  logfile = '/var/log/slice/getmap'              
-                 logger.logslice("sliceid: %s"%sliver['slice_id'],logfile)
+                 logger.logslice("---get slice %s from myplc"%sliver['slice_id'],logfile)
                  #wangyang,what things do we need to focus on , add them here!After this ,we should delete the db file(*.pickle)
-                 slices['slice_id'] = sliver['slice_id']
-                 slices['virouterid'] = 0
-                 slices['status'] = 'none'
-                 slices['vip'] = 'none'
-                 slices['vmac'] = 'none'
                  #wangyang,get vlanid from myplc,vlanid of slivers in one slice should be same 
-                 slices['vlanid'] = 'none'
+                 #wangyang,get vip and vmac from myplc,vip and vmac of slivers in one slice should be different,just a global controller can make sure of this. 
+                 sliver_check = 0
                  for tag in sliver['attributes']:
                      if tag['tagname']=='vsys_vnet':
                          slices['vlanid'] = tag['value']
+                         logger.logslice("*get vlanid %s "%slices['vlanid'],logfile)
+                         sliver_check += 1
+                     if tag['tagname']=='sliver_ip':
+                         slices['vip'] = tag['value']
+                         logger.logslice("*get vip %s "%slices['vip'],logfile)
+                         sliver_check += 1
+                     if tag['tagname']=='sliver_mac':
+                         slices['vmac'] = tag['value']
+                         logger.logslice("*get vmac %s "%slices['vmac'],logfile)
+                         sliver_check += 1
+                 if sliver_check<3:
+                     logger.logslice("*slice %s check failed,as no vlanid,vmac or vip"%slivers,logfile)
+                     continue
+                 slices['slice_name'] = sliver['name']
+                 slices['slice_id'] = sliver['slice_id']
+                 slices['vrname'] = 0
+                 slices['status'] = 'none'
                  slices['port'] = 0
                  slices['keys'] = sliver['keys']
                  slivers.append(slices)                      
-                 logger.logslice("sliceid: %s"%slivers,logfile)
+                 logger.logslice("---get slice %s successfully,"%slivers,logfile)
         slicemap['slivers'] = slivers
         return slicemap
 
@@ -153,7 +167,7 @@ class NodeManager:
     # add by lihaitao, unassign all users, will update later
     def runassignsliver(self, sliver):
         logfile = '/var/log/slice/log'
-        logger.logslice("sliceid: %s,vrouteid:  %s unassign "%(sliver['slice_id'],sliver['virouterid']),logfile)
+        logger.logslice("sliceid: %s,vrouteid:  %s unassign "%(sliver['slice_id'],sliver['vrname']),logfile)
         #call router API
         # update the user keys to vm
         try:
@@ -208,15 +222,20 @@ class NodeManager:
         return slicemapdb
     #wangyang,add,delete,update sliver to router,here just write log    
     def rcreatesliver(self,sliver,plc):
-        sliver['virouterid'] = str(NodeManager.PEARL_DPID) + str(sliver['slice_id'])
-        sliver['vip'] = self.getvip()
-        sliver['vmac'] = self.getvmac()
+
+        #sliver['vrname'] = str(NodeManager.PEARL_DPID) + str(sliver['slice_id'])
+        #wangyangv2,get this from myplc
+        #sliver['vip'] = self.getvip()
+        #wangyangv2,get this from myplc
+        #sliver['vmac'] = self.getvmac()
         #sliver['vlanid'] = self.getvlanid()
         logfile = '/var/log/slice/log'
-        logger.logslice("(sliceid: %s,vrouteid: %s,vip: %s,vmac:%s,vlanid:%s)  create"%(sliver['slice_id'],sliver['virouterid'],sliver['vip'],sliver['vmac'],sliver['vlanid']),logfile)
+        logger.logslice("(sliceid: %s,vrouteid: %s,vip: %s,vmac:%s,vlanid:%s)  create"%(sliver['slice_id'],sliver['vrname'],sliver['vip'],sliver['vmac'],sliver['vlanid']),logfile)
         #call router API
         vrp = self.pearl.factory.create('ns1:creatVirtualRouterParam')
-        vrp.name = 'vm_slice' + str(sliver['slice_id'])
+        #vrp.name = 'vm_slice' + str(sliver['slice_id'])
+        vrp.name = 'vm_' + str(sliver['slice_name'])
+        sliver['vrname'] = vrp.name
         vrp.memory = 1024*1024
         vrp.currentMemory = vrp.memory
         vrp.vcpu = 1
@@ -259,12 +278,12 @@ class NodeManager:
             logger.log ("nodemanager: Create Virtual Router Error:", e)
  
     def rdeletesliver(self,sliver):
-        #self.updaterouterid(sliver['virouterid'])
         self.updatevip(sliver['vip'])
         self.updatevmac(sliver['vmac'])
         self.updatevlanid(sliver['vlanid'])
         logfile = '/var/log/slice/log'
-        logger.logslice("rdeletesliver: sliceid-%s, vrouteid-%s, sliver['vip']-%s, sliver['vmac']-%s, sliver[vlanid]-%s"%(sliver['slice_id'], sliver['virouterid'], sliver['vip'], sliver['vmac'], sliver['vlanid']),logfile)
+        #logger.logslice("rdeletesliver: sliceid-%s, vrouteid-%s, sliver['vip']-%s, sliver['vmac']-%s, sliver[vlanid]-%s"%(sliver['slice_id'], sliver['virouterid'], sliver['vip'], sliver['vmac'], sliver['vlanid']),logfile)
+        logger.logslice("(sliceid: %s,vrouteid: %s,vip: %s,vmac:%s,vlanid:%s)  delete"%(sliver['slice_id'],sliver['vrname'],sliver['vip'],sliver['vmac'],sliver['vlanid']),logfile)
 
         #call router API
         try:
@@ -289,7 +308,7 @@ class NodeManager:
     def rupdatesliver(self,sliver):
         logfile = '/var/log/slice/log'
                 #logger.logslice("slicename: %s"%sliver['name'],logfile)    
-        logger.logslice("sliceid: %s,vrouteid:  %s  update"%(sliver['slice_id'],sliver['virouterid']),logfile)
+        logger.logslice("sliceid: %s,vrouteid:  %s  update"%(sliver['slice_id'],sliver['vrname']),logfile)
         #call router API
         # update the user keys to vm
         try:
@@ -300,64 +319,6 @@ class NodeManager:
             logger.log ("nodemanager: Assign Virtual Router %s" %(vrname))
         except Exception as e:
             logger.log ("nodemanager: Update Virtual Router Error:", e)
-
-    #wangyang,get a available router id 
-    def getvip(self):
-        vip = self.loadvip()
-        
-        for vips in vip:
-             if vips['status'] == 'available':
-             	vips['status'] = 'used'
-             	#router.remove(routerid)
-             	#router.append(routerid)
-             	self.savevip(vip)
-             	return vips['ip']
-
-        return 0       
-    def getvmac(self):
-        vmac = self.loadvmac()
-        
-        for vmacs in vmac:
-             if vmacs['status'] == 'available':
-             	vmacs['status'] = 'used'
-             	#router.remove(routerid)
-             	#router.append(routerid)
-             	self.savevmac(vmac)
-             	return vmacs['mac']
-
-   # def getvlanid(self):
-   #     vlanids = self.loadvlanid()
-   #     for vlanid in vlanids:
-   #          if vlanid['status'] == 'available':
-   #          	vlanid['status'] = 'used'
-   #          	self.savevlanid(vlanids)
-   #          	return vlanid['vlanid']
-        
-    def updaterouterid(self,id):
-        router = self.loadrouterid()
-        for routerid in router:
-            if routerid['id'] == id:
-                routerid['status'] = 'available'
-                self.saverouterid(router)
-
-    def updatevip(self,ip):
-        vip = self.loadvip()
-        for vips in vip:
-            if vips['ip'] == ip:
-                vips['status'] = 'available'
-                self.savevip(vip)
-    def updatevmac(self,mac):
-        vmac = self.loadvmac()
-        for vmacs in vmac:
-            if vmacs['mac'] == mac:
-                 vmacs['status'] = 'available'
-                 self.savevmac(vmac)
-   # def updatevlanid(self,vid):
-   #    vlanids = self.loadvlanid()
-   #     for vlanid in vlanids:
-   #         if  vlanid['vlanid'] == vid:
-   #             vlanid['status'] = 'available'
-   #             self.savevlanid(vlanids)
 
     def GetSlivers(self, config, plc):
         """Retrieves GetSlivers at PLC and triggers callbacks defined in modules/plugins"""
@@ -378,14 +339,14 @@ class NodeManager:
             # log it for debug purposes, no matter what verbose is
             logger.log_slivers(data)
             logger.verbose("nodemanager: Sync w/ PLC done")
-            last_data=data
+            #last_data=data
         except:
             logger.log_exc("nodemanager: failed in GetSlivers")
             #  XXX So some modules can at least boostrap.
             logger.log("nodemanager:  Can't contact PLC to GetSlivers().  Continuing.")
             data = {}
             # for modules that request it though the 'persistent_data' property
-            last_data=self.loadSlivers()
+            #last_data=self.loadSlivers()
         logger.log("*************************************************")
         logger.log("we should provide these information to PEARL TEAM")
         logger.log_map({},"******************************************")
@@ -424,9 +385,9 @@ class NodeManager:
             logger.verbose('nodemanager: triggering %s.GetSlivers'%module.__name__)
             try:
                 callback = getattr(module, 'GetSlivers')
-                module_data=data
-                if getattr(module,'persistent_data',False):
-                    module_data=last_data
+                #module_data=data
+                #if getattr(module,'persistent_data',False):
+                #    module_data=last_data
                 callback(data, config, plc)
             except:
                 logger.log_exc("nodemanager: GetSlivers failed to run callback for module %r"%module)
@@ -477,26 +438,6 @@ class NodeManager:
         logger.log ("nodemanager: saving successfully fetched slicemap in %s" % NodeManager.MAP_FILE)
         pickle.dump(slicemap, f)
         f.close()
-    #wangyang,save router id  to db
-    def saverouterid (self, router):
-        f = open(NodeManager.ROUTER_FILE, "w")
-        logger.log ("nodemanager: saving successfully router id in %s" % NodeManager.VIP_FILE)
-        pickle.dump(router, f)
-        f.close()
-        logger.log_router(router,"This is writed to db")
-    
-    def savevip (self, vip):
-        f = open(NodeManager.VIP_FILE, "w")
-        logger.log ("nodemanager: saving successfully router id in %s" % NodeManager.VIP_FILE)
-        pickle.dump(vip, f)
-        f.close()
-        logger.log_router(vip,"This is writed to db")
-    def savevmac (self, vmac):
-        f = open(NodeManager.VMAC_FILE, "w")
-        logger.log ("nodemanager: saving successfully router mac in %s" % NodeManager.VMAC_FILE)
-        pickle.dump(vmac, f)
-        f.close()
-        logger.log_router(vmac,"This is writed to db")
    
     #def savevlanid (self, vid):
     #    f = open(NodeManager.VLANID_FILE, "w")
@@ -533,64 +474,7 @@ class NodeManager:
             slicemapdb['slivers'] = []
             return slicemapdb
     #wangyang,load routerid from db,otherwise return default config        
-    def loadrouterid(self):
-        try:
-            f = open(NodeManager.ROUTER_FILE, "r+")
-            logger.log("nodemanager: restoring latest known router id from %s" % NodeManager.DB_FILE)
-            router = pickle.load(f)
-            f.close()
-            return router
-        except:
-            logger.log("Could not restore router id from %s" % NodeManager.DB_FILE)
-            router = []    
-            
-            for i in range(128, 254):
-                routerid = {}
-                routerid['id'] = i
-                routerid['status'] = 'available'
-                router.append(routerid)                
-            return router
 
-    def loadvip(self):
-        try:
-            f = open(NodeManager.VIP_FILE, "r+")
-            logger.log("nodemanager: restoring latest known vip from %s" % NodeManager.VIP_FILE)
-            vips = pickle.load(f)
-            f.close()
-            return vips
-       except:
-            logger.log("Could not restore vip from %s" % NodeManager.VIP_FILE)
-            vips = []    
-            
-            for i in range(128,254):
-                vip = {}
-                vip['ip'] = '192.168.122.'+str(i)
-                vip['status'] = 'available'
-                vips.append(vip)                
-          return vips
-
-    def loadvmac(self):
-        try:
-            f = open(NodeManager.VMAC_FILE, "r+")
-            logger.log("nodemanager: restoring latest known vip from %s" % NodeManager.VMAC_FILE)
-            vmacs = pickle.load(f)
-            f.close()
-            return vmacs
-        except:
-            logger.log("Could not restore vip from %s" % NodeManager.VMAC_FILE)
-            vmacs = []    
-            
-            for i in range(1,15):
-                vmac = {}
-                vmac['mac'] = '24:3f:d0:39:52:0'+(str(hex(i)))[2:]
-                vmac['status'] = 'available'
-                vmacs.append(vmac)
-            for i in range(16,128):
-                vmac = {}
-                vmac['mac'] = '24:3f:d0:39:52:'+(str(hex(i)))[2:]
-                vmac['status'] = 'available'
-                vmacs.append(vmac)
-            return vmacs
     '''
     def loadvlanid(self):
         try:

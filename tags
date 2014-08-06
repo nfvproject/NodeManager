@@ -15,19 +15,24 @@ AdminTicket	api_calls.py	/^def AdminTicket(ticket):$/;"	f
 BASE_DIR	cgroups.py	/^BASE_DIR = '\/sys\/fs\/cgroup'$/;"	v
 Buffer	logger.py	/^class Buffer:$/;"	c
 CGROUPS	cgroups.py	/^CGROUPS = dict()$/;"	v
+CODEMUXCONF	plugins/codemux.py	/^CODEMUXCONF="\/etc\/codemux\/codemux.conf"$/;"	v
 CON_BASE_DIR	sliver_lxc.py	/^    CON_BASE_DIR     = '\/vservers'$/;"	v	class:Sliver_LXC
+Certificate	plugins/sfagids.py	/^    from sfa.trust.certificate import Keypair, Certificate$/;"	i
 CertificateCheckingSafeTransport	safexmlrpc.py	/^class CertificateCheckingSafeTransport (xmlrpclib.Transport):$/;"	c
 CgroupWatch	cgroups.py	/^class CgroupWatch(pyinotify.ProcessEvent):$/;"	c
 Client	nodemanager.py	/^from suds.client import Client$/;"	i
+ComponentAPI	plugins/sfagids.py	/^    from sfa.plc.api import ComponentAPI$/;"	i
 Config	bwmon.py	/^from config import Config$/;"	i
 Config	conf_files.py	/^from config import Config$/;"	i
 Config	config.py	/^class Config:$/;"	c
 Config	nodemanager.py	/^from config import Config$/;"	i
 Config	nodemanager_origin.py	/^from config import Config$/;"	i
+Config	plugins/codemux.py	/^from config import Config$/;"	i
 Controller	controller.py	/^class Controller(account.Account):$/;"	c
 CoreSched	coresched_lxc.py	/^class CoreSched:$/;"	c
 CoreSched	database.py	/^from coresched_lxc import CoreSched$/;"	i
 Create	api_calls.py	/^def Create(sliver_name):$/;"	f
+Credential	plugins/sfagids.py	/^    from sfa.trust.credential import Credential$/;"	i
 DB_FILE	bwmon.py	/^DB_FILE = "\/var\/lib\/nodemanager\/bwmon.pickle"$/;"	v
 DB_FILE	database.py	/^DB_FILE = '\/var\/lib\/nodemanager\/database.pickle'$/;"	v
 DB_FILE	nodemanager.py	/^    DB_FILE = "\/var\/lib\/nodemanager\/getslivers.pickle"$/;"	v	class:NodeManager
@@ -37,9 +42,22 @@ DEFAULT_ALLOCATION	slivermanager.py	/^DEFAULT_ALLOCATION = {$/;"	v
 Database	database.py	/^class Database(dict):$/;"	c
 Destroy	api_calls.py	/^def Destroy(sliver_name):$/;"	f
 ENABLE	bwmon.py	/^ENABLE = True$/;"	v
+Filter	SliceTags.py	/^from PLC.Filter import Filter$/;"	i
+FreePearlTag	GetPearl.py	/^    def FreePearlTag(self,slice_id,node_id):$/;"	m	class:GetPearl
+FreePearlTag	SliceTags.py	/^    def FreePearlTag(self,slice_id,node_id):$/;"	m	class:SliceTag
+FreeVlanid	GetPearl.py	/^    def FreeVlanid(self,slice_id):$/;"	m	class:GetPearl
+FreeVlanid	SliceTags.py	/^    def FreeVlanid(self,slice_id):$/;"	m	class:SliceTag
+GID	plugins/sfagids.py	/^    from sfa.trust.gid import GID$/;"	i
 GPG	ticket.py	/^GPG = '\/usr\/bin\/gpg'$/;"	v
 GetEffectiveRSpec	api_calls.py	/^def GetEffectiveRSpec(sliver_name):$/;"	f
 GetLoans	api_calls.py	/^def GetLoans(sliver_name):$/;"	f
+GetPearl	GetPearl.py	/^class GetPearl():$/;"	c
+GetPearlVip	GetPearl.py	/^    def GetPearlVip(self,slice_id,node_id):$/;"	m	class:GetPearl
+GetPearlVip	SliceTags.py	/^    def GetPearlVip(self,slice_id,node_id):$/;"	m	class:SliceTag
+GetPearlVlanid	GetPearl.py	/^    def GetPearlVlanid(self,slice_id):$/;"	m	class:GetPearl
+GetPearlVlanid	SliceTags.py	/^    def GetPearlVlanid(self,slice_id):$/;"	m	class:SliceTag
+GetPearlVmac	GetPearl.py	/^    def GetPearlVmac(self,slice_id,node_id):$/;"	m	class:GetPearl
+GetPearlVmac	SliceTags.py	/^    def GetPearlVmac(self,slice_id,node_id):$/;"	m	class:SliceTag
 GetRSpec	api_calls.py	/^def GetRSpec(sliver_name):$/;"	f
 GetRecord	api_calls.py	/^def GetRecord(sliver_name):$/;"	f
 GetSSHKeys	api_calls.py	/^def GetSSHKeys():$/;"	f
@@ -48,9 +66,24 @@ GetSlivers	conf_files.py	/^def GetSlivers(data, config = None, plc = None):$/;"	
 GetSlivers	net.py	/^def GetSlivers(data, config, plc):$/;"	f
 GetSlivers	nodemanager.py	/^    def GetSlivers(self, config, plc):$/;"	m	class:NodeManager
 GetSlivers	nodemanager_origin.py	/^    def GetSlivers(self, config, plc):$/;"	m	class:NodeManager
+GetSlivers	plugins/codemux.py	/^def GetSlivers(data, config, plc = None):$/;"	f
+GetSlivers	plugins/hostmap.py	/^def GetSlivers(data, config=None, plc=None):$/;"	f
+GetSlivers	plugins/interfaces.py	/^def GetSlivers(data, config=None, plc=None):$/;"	f
+GetSlivers	plugins/omf_resctl.py	/^def GetSlivers(data, conf = None, plc = None):$/;"	f
+GetSlivers	plugins/privatebridge.py	/^def GetSlivers(data, conf = None, plc = None):$/;"	f
+GetSlivers	plugins/rawdisk.py	/^def GetSlivers(data, config=None, plc=None):$/;"	f
+GetSlivers	plugins/reservation.py	/^    def GetSlivers (self, data, conf=None, plc=None):$/;"	m	class:reservation
+GetSlivers	plugins/reservation.py	/^def GetSlivers(data, conf = None, plc = None):$/;"	f
+GetSlivers	plugins/sfagids.py	/^def GetSlivers(data, config=None, plc=None):$/;"	f
+GetSlivers	plugins/sliverauth.py	/^def GetSlivers(data, config, plc):$/;"	f
+GetSlivers	plugins/specialaccounts.py	/^def GetSlivers(data, conf = None, plc = None):$/;"	f
+GetSlivers	plugins/syndicate.py	/^def GetSlivers(data, conf = None, plc = None):$/;"	f
+GetSlivers	plugins/vsys.py	/^def GetSlivers(data, config=None, plc=None):$/;"	f
+GetSlivers	plugins/vsys_privs.py	/^def GetSlivers(data, config=None, plc=None):$/;"	f
 GetSlivers	slivermanager.py	/^def GetSlivers(data, config = None, plc=None, fullupdate=True):$/;"	f
 GetXIDs	api_calls.py	/^def GetXIDs():$/;"	f
 Help	api_calls.py	/^def Help():$/;"	f
+Hierarchy	plugins/sfagids.py	/^    from sfa.trust.hierarchy import Hierarchy$/;"	i
 IPTABLES_RESTORE	iptables.py	/^    IPTABLES_RESTORE = "\/sbin\/iptables-restore"$/;"	v	class:IPTables
 IPTables	iptables.py	/^class IPTables:$/;"	c
 InitI2	net.py	/^def InitI2(plc, data):$/;"	f
@@ -58,6 +91,7 @@ InitNAT	net.py	/^def InitNAT(plc, data):$/;"	f
 InitNodeLimit	net.py	/^def InitNodeLimit(data):$/;"	f
 Initscript	initscript.py	/^class Initscript:$/;"	c
 Initscript	sliver_lxc.py	/^from initscript import Initscript$/;"	i
+Keypair	plugins/sfagids.py	/^    from sfa.trust.certificate import Keypair, Certificate$/;"	i
 LOANABLE_RESOURCES	database.py	/^LOANABLE_RESOURCES = MINIMUM_ALLOCATION.keys()$/;"	v
 LOG_DATABASE	logger.py	/^LOG_DATABASE = '\/var\/lib\/nodemanager\/database.txt'$/;"	v
 LOG_FILE	logger.py	/^LOG_FILE    = '\/var\/log\/nodemanager'$/;"	v
@@ -65,6 +99,7 @@ LOG_LEVEL	logger.py	/^LOG_LEVEL=LOG_NODE$/;"	v
 LOG_MAP	logger.py	/^LOG_MAP = '\/var\/log\/slice\/map.txt'$/;"	v
 LOG_NODE	logger.py	/^LOG_NODE=1$/;"	v
 LOG_NONE	logger.py	/^LOG_NONE=0$/;"	v
+LOG_PATH	logger.py	/^LOG_PATH = '\/var\/log\/slice\/'$/;"	v
 LOG_ROUTER	logger.py	/^LOG_ROUTER = '\/var\/log\/slice\/router.txt'$/;"	v
 LOG_SLIVERS	logger.py	/^LOG_SLIVERS = '\/var\/lib\/nodemanager\/getslivers.txt'$/;"	v
 LOG_VERBOSE	logger.py	/^LOG_VERBOSE=2$/;"	v
@@ -74,11 +109,24 @@ MINIMUM_ALLOCATION	database.py	/^MINIMUM_ALLOCATION = {'cpu_pct': 0,$/;"	v
 Mixed	api_calls.py	/^    def Mixed(a = None, b = None, c = None): pass$/;"	f
 Mixed	api_calls.py	/^    from PLC.Parameter import Parameter, Mixed$/;"	i
 NMLock	tools.py	/^class NMLock:$/;"	c
+NODE_ID	GetPearl.py	/^    NODE_ID = 32$/;"	v	class:GetPearl
+NODE_ID	SliceTags.py	/^    NODE_ID = 32$/;"	v	class:SliceTag
 NODE_ID	nodemanager.py	/^    NODE_ID = 32$/;"	v	class:NodeManager
+Node	SliceTags.py	/^from PLC.Nodes import Node, Nodes$/;"	i
+NodeGroup	SliceTags.py	/^from PLC.NodeGroups import NodeGroup, NodeGroups$/;"	i
+NodeGroups	SliceTags.py	/^from PLC.NodeGroups import NodeGroup, NodeGroups$/;"	i
 NodeManager	nodemanager.py	/^class NodeManager:$/;"	c
 NodeManager	nodemanager_origin.py	/^class NodeManager:$/;"	c
+Nodes	SliceTags.py	/^from PLC.Nodes import Node, Nodes$/;"	i
+OvsException	plugins/privatebridge.py	/^class OvsException (Exception) :$/;"	c
+PEARL_API_URL	GetPearl.py	/^    PEARL_API_URL = "http:\/\/192.168.1.43:8080?wsdl"$/;"	v	class:GetPearl
+PEARL_API_URL	SliceTags.py	/^    PEARL_API_URL = "http:\/\/192.168.1.43:8080?wsdl"$/;"	v	class:SliceTag
 PEARL_API_URL	nodemanager.py	/^    PEARL_API_URL = "http:\/\/192.168.1.43:8080?wsdl"$/;"	v	class:NodeManager
+PEARL_DEFAULT_CONFIG	GetPearl.py	/^    PEARL_DEFAULT_CONFIG = "\/etc\/planetlab\/pearl_default_config.xml"$/;"	v	class:GetPearl
+PEARL_DEFAULT_CONFIG	SliceTags.py	/^    PEARL_DEFAULT_CONFIG = "\/etc\/planetlab\/pearl_default_config.xml"$/;"	v	class:SliceTag
 PEARL_DEFAULT_CONFIG	nodemanager.py	/^    PEARL_DEFAULT_CONFIG = "\/etc\/planetlab\/pearl_default_config.xml"$/;"	v	class:NodeManager
+PEARL_DPID	GetPearl.py	/^    PEARL_DPID = 1$/;"	v	class:GetPearl
+PEARL_DPID	SliceTags.py	/^    PEARL_DPID = 1$/;"	v	class:SliceTag
 PEARL_DPID	nodemanager.py	/^    PEARL_DPID = 1$/;"	v	class:NodeManager
 PID_FILE	tools.py	/^PID_FILE = '\/var\/run\/nodemanager.pid'$/;"	v
 PIPE	curlwrapper.py	/^from subprocess import PIPE, Popen$/;"	i
@@ -90,23 +138,32 @@ PLCAPI	plcapi.py	/^class PLCAPI:$/;"	c
 PLC_SLICE_PREFIX	api.py	/^    PLC_SLICE_PREFIX="pl"$/;"	v
 PLUGIN_PATH	nodemanager.py	/^    PLUGIN_PATH = "\/usr\/share\/NodeManager\/plugins"$/;"	v	class:NodeManager
 PLUGIN_PATH	nodemanager_origin.py	/^    PLUGIN_PATH = "\/usr\/share\/NodeManager\/plugins"$/;"	v	class:NodeManager
+PREFIX	plugins/hostmap.py	/^PREFIX = "# ----- This section added by nodemanager hostmap module. Do not edit. -----"$/;"	v
+Parameter	SliceTags.py	/^from PLC.Parameter import Parameter$/;"	i
 Parameter	api_calls.py	/^    def Parameter(a = None, b = None): pass$/;"	f
 Parameter	api_calls.py	/^    from PLC.Parameter import Parameter, Mixed$/;"	i
 Popen	curlwrapper.py	/^from subprocess import PIPE, Popen$/;"	i
 Popen	ticket.py	/^from subprocess import PIPE, Popen$/;"	i
 REF_IMG_BASE_DIR	sliver_lxc.py	/^    REF_IMG_BASE_DIR = '\/vservers\/.lvref'$/;"	v	class:Sliver_LXC
-ROUTER_FILE	nodemanager.py	/^    ROUTER_FILE = "\/var\/lib\/nodemanager\/router.pickle"$/;"	v	class:NodeManager
+ROUTER_FILE	nodemanager.py	/^    ROUTER_FILE = "\/var\/lib\/myplc\/router.pickle"$/;"	v	class:NodeManager
 ReCreate	api_calls.py	/^def ReCreate(sliver_name):$/;"	f
+Row	SliceTags.py	/^from PLC.Table import Row, Table$/;"	i
 SHELL	controller.py	/^    SHELL = '\/usr\/bin\/forward_api_calls'  # tunneling shell$/;"	v	class:Controller
 SHELL	sliver_lxc.py	/^    SHELL = '\/usr\/sbin\/vsh'$/;"	v	class:Sliver_LXC
 STATES	create_lxc.py	/^STATES = {$/;"	v
 STATES	sliver_libvirt.py	/^STATES = {$/;"	v
 SUB_SYSTEMS	cgroups.py	/^SUB_SYSTEMS = ['blkio', 'freezer', 'devices', 'memory', 'cpu,cpuacct', 'cpuset']$/;"	v
+SUFFIX	plugins/hostmap.py	/^SUFFIX = "# ----- End -----"$/;"	v
 ServerProxy	safexmlrpc.py	/^class ServerProxy(xmlrpclib.ServerProxy):$/;"	c
 SetLoans	api_calls.py	/^def SetLoans(sliver_name, loans):$/;"	f
+SetSliverTag	plugins/sliverauth.py	/^def SetSliverTag(plc, slice, tagname, value):$/;"	f
+SfaConfig	plugins/sfagids.py	/^    from sfa.util.config import Config as SfaConfig$/;"	i
 SimpleXMLRPCServer	api.py	/^import SimpleXMLRPCServer$/;"	i
 SimpleXMLRPCServer	api_calls.py	/^import SimpleXMLRPCServer$/;"	i
+Singleton	plugins/reservation.py	/^def Singleton (klass,*args,**kwds):$/;"	f
 Slice	bwmon.py	/^class Slice:$/;"	c
+SliceTag	SliceTags.py	/^class SliceTag(Row):$/;"	c
+SliceTags	SliceTags.py	/^class SliceTags(Table):$/;"	c
 Sliver_LXC	sliver_lxc.py	/^class Sliver_LXC(Sliver_Libvirt, Initscript):$/;"	c
 Sliver_Libvirt	sliver_libvirt.py	/^class Sliver_Libvirt(Account):$/;"	c
 Sliver_Libvirt	sliver_lxc.py	/^from sliver_libvirt import Sliver_Libvirt$/;"	i
@@ -117,17 +174,35 @@ Start	api_calls.py	/^def Start(sliver_name):$/;"	f
 Stop	api_calls.py	/^def Stop(sliver_name):$/;"	f
 TYPE	controller.py	/^    TYPE = 'controller.Controller'$/;"	v	class:Controller
 TYPE	sliver_lxc.py	/^    TYPE = 'sliver.LXC'$/;"	v	class:Sliver_LXC
+Table	SliceTags.py	/^from PLC.Table import Row, Table$/;"	i
+TagType	SliceTags.py	/^from PLC.TagTypes import TagType, TagTypes$/;"	i
+TagTypes	SliceTags.py	/^from PLC.TagTypes import TagType, TagTypes$/;"	i
 Template	create_lxc.py	/^from string import Template$/;"	i
 Template	sliver_lxc.py	/^from string import Template$/;"	i
+Thread	plugins/privatebridge.py	/^from threading import Thread$/;"	i
+Thread	plugins/syndicate.py	/^from threading import Thread$/;"	i
 Ticket	api_calls.py	/^def Ticket(ticket):$/;"	f
 UNIX_ADDR	api.py	/^UNIX_ADDR = '\/tmp\/nodemanager.api'$/;"	v
-VIP_FILE	nodemanager.py	/^    VIP_FILE = "\/var\/lib\/nodemanager\/vip.pickle"$/;"	v	class:NodeManager
+VIP_FILE	GetPearl.py	/^    VIP_FILE = "\/var\/lib\/myplc\/vip.pickle"$/;"	v	class:GetPearl
+VIP_FILE	SliceTags.py	/^    VIP_FILE = "\/var\/lib\/myplc\/vip.pickle"$/;"	v	class:SliceTag
+VIP_FILE	nodemanager.py	/^    VIP_FILE = "\/var\/lib\/myplc\/vip.pickle"$/;"	v	class:NodeManager
 VIRT_TECHS	cgroups.py	/^VIRT_TECHS = ['lxc']$/;"	v
-VLANID_FILE	nodemanager.py	/^    VLANID_FILE = "\/var\/lib\/nodemanager\/vlanid.pickle"$/;"	v	class:NodeManager
-VMAC_FILE	nodemanager.py	/^    VMAC_FILE = "\/var\/lib\/nodemanager\/vmac.pickle"$/;"	v	class:NodeManager
+VLANID_FILE	GetPearl.py	/^    VLANID_FILE = "\/var\/lib\/myplc\/vlanid.pickle"$/;"	v	class:GetPearl
+VLANID_FILE	SliceTags.py	/^    VLANID_FILE = "\/var\/lib\/myplc\/vlanid.pickle"$/;"	v	class:SliceTag
+VLANID_FILE	nodemanager.py	/^    VLANID_FILE = "\/var\/lib\/myplc\/vlanid.pickle"$/;"	v	class:NodeManager
+VMAC_FILE	GetPearl.py	/^    VMAC_FILE = "\/var\/lib\/myplc\/vmac.pickle"$/;"	v	class:GetPearl
+VMAC_FILE	SliceTags.py	/^    VMAC_FILE = "\/var\/lib\/myplc\/vmac.pickle"$/;"	v	class:SliceTag
+VMAC_FILE	nodemanager.py	/^    VMAC_FILE = "\/var\/lib\/myplc\/vmac.pickle"$/;"	v	class:NodeManager
+VSLIVER_FILE	GetPearl.py	/^    VSLIVER_FILE = "\/var\/lib\/myplc\/vsliver.pickle"$/;"	v	class:GetPearl
+VSLIVER_FILE	SliceTags.py	/^    VSLIVER_FILE = "\/var\/lib\/myplc\/vsliver.pickle"$/;"	v	class:SliceTag
+VSLIVER_FILE	nodemanager.py	/^    VSLIVER_FILE = "\/var\/lib\/myplc\/vsliver.pickle"$/;"	v	class:NodeManager
+VSYSBKEND	plugins/vsys.py	/^VSYSBKEND="\/vsys"$/;"	v
+VSYSCONF	plugins/vsys.py	/^VSYSCONF="\/etc\/vsys.conf"$/;"	v
+VSYS_PRIV_DIR	plugins/vsys_privs.py	/^VSYS_PRIV_DIR = "\/etc\/planetlab\/vsys-attributes"$/;"	v
 Worker	account.py	/^class Worker:$/;"	c
 __del__	tools.py	/^    def __del__(self):$/;"	m	class:NMLock	file:
 __getattr__	plcapi.py	/^    def __getattr__(self, methodname):$/;"	m	class:PLCAPI	file:
+__init__	SliceTags.py	/^    def __init__(self, api, slice_tag_filter = None, columns = None):$/;"	m	class:SliceTags
 __init__	account.py	/^    def __init__(self, name):$/;"	m	class:Account
 __init__	account.py	/^    def __init__(self, name):$/;"	m	class:Worker
 __init__	bwmon.py	/^    def __init__(self, xid, name, rspec):$/;"	m	class:Slice
@@ -141,12 +216,15 @@ __init__	logger.py	/^    def __init__ (self,message='log_call: '):$/;"	m	class:B
 __init__	nodemanager.py	/^    def __init__ (self):$/;"	m	class:NodeManager
 __init__	nodemanager_origin.py	/^    def __init__ (self):$/;"	m	class:NodeManager
 __init__	plcapi.py	/^    def __init__(self, uri, cacert, auth, timeout = 90, **kwds):$/;"	m	class:PLCAPI
+__init__	plugins/privatebridge.py	/^    def __init__ (self, message="no message"):$/;"	m	class:OvsException
+__init__	plugins/reservation.py	/^    def __init__ (self):$/;"	m	class:reservation
 __init__	safexmlrpc.py	/^    def __init__(self, cacert, timeout):$/;"	m	class:CertificateCheckingSafeTransport
 __init__	safexmlrpc.py	/^    def __init__(self, uri, cacert, timeout = 300, **kwds):$/;"	m	class:ServerProxy
 __init__	sliver_libvirt.py	/^    def __init__(self, rec):$/;"	m	class:Sliver_Libvirt
 __init__	sliver_lxc.py	/^    def __init__ (self, rec):$/;"	m	class:Sliver_LXC
 __init__	tools.py	/^    def __init__(self, file):$/;"	m	class:NMLock
 __repr__	bwmon.py	/^    def __repr__(self):$/;"	m	class:Slice	file:
+__repr__	plugins/privatebridge.py	/^    def __repr__ (self): return message$/;"	m	class:OvsException	file:
 _compute_effective_rspecs	database.py	/^    def _compute_effective_rspecs(self):$/;"	m	class:Database
 _destroy	account.py	/^    def _destroy(self, curr_class):$/;"	f
 _dispatch	api.py	/^    def _dispatch(self, method_name_unicode, args):$/;"	m	class:APIRequestHandler
@@ -162,6 +240,7 @@ accepts	api_calls.py	/^                   accepts=[],$/;"	v
 account	api_calls.py	/^import account$/;"	i
 account	controller.py	/^import account$/;"	i
 account	database.py	/^import account$/;"	i
+account	plugins/reservation.py	/^import account$/;"	i
 account	slivermanager.py	/^import account$/;"	i
 acquire	tools.py	/^    def acquire(self):$/;"	m	class:NMLock
 add	logger.py	/^    def add (self,c):$/;"	m	class:Buffer
@@ -196,6 +275,9 @@ cgroups	coresched_lxc.py	/^import cgroups$/;"	i
 cgroups	sliver_libvirt.py	/^import cgroups$/;"	i
 check_authentication	plcapi.py	/^    def check_authentication(self):$/;"	m	class:PLCAPI
 checksum	conf_files.py	/^    def checksum(self, path):$/;"	m	class:conf_files
+checksum	plugins/hostmap.py	/^def checksum(path):$/;"	f
+checksum	plugins/interfaces.py	/^def checksum(path):$/;"	f
+clear_timers	plugins/reservation.py	/^    def clear_timers (self):$/;"	m	class:reservation
 close_nonstandard_fds	tools.py	/^def close_nonstandard_fds():$/;"	f
 command	create_lxc.py	/^                    command=['chown','%s:slices'%name,from_root]$/;"	v
 command_in_slice	tools.py	/^def command_in_slice (slicename, argv):$/;"	f
@@ -208,6 +290,7 @@ configure	create_lxc.py	/^def configure(name, rec):$/;"	f
 configure	initscript.py	/^    def configure (self, rec):$/;"	m	class:Initscript
 configure	sliver_libvirt.py	/^    def configure(self, rec):$/;"	m	class:Sliver_Libvirt
 configure	sliver_lxc.py	/^    def configure (self, rec):$/;"	m	class:Sliver_LXC
+configure_slicebridge	plugins/privatebridge.py	/^def configure_slicebridge(sliver, attributes):$/;"	f
 connections	sliver_libvirt.py	/^connections = dict()$/;"	v
 contents	create_lxc.py	/^                contents=file(from_root).readlines()$/;"	v
 controller	slivermanager.py	/^import controller$/;"	i
@@ -217,9 +300,12 @@ core_modules	nodemanager_origin.py	/^    core_modules=['conf_files']$/;"	v	class
 create	account.py	/^    def create(name, vref = None): abstract$/;"	m	class:Account
 create	controller.py	/^    def create(name, vref = None):$/;"	m	class:Controller
 create	sliver_lxc.py	/^    def create(name, rec=None):$/;"	m	class:Sliver_LXC
+createVsysDir	plugins/vsys.py	/^def createVsysDir(sliver):$/;"	f
 create_lxc	create_lxc.py	/^def create_lxc(name, rec=None):$/;"	f
 create_sem	account.py	/^create_sem = threading.Semaphore(1)$/;"	v
 curlwrapper	conf_files.py	/^import curlwrapper$/;"	i
+curlwrapper	plugins/hostmap.py	/^import curlwrapper$/;"	i
+curlwrapper	plugins/interfaces.py	/^import curlwrapper$/;"	i
 curlwrapper	safexmlrpc.py	/^import curlwrapper$/;"	i
 daemon	tools.py	/^def daemon():$/;"	f
 data	conf_files.py	/^    data = plc.GetSlivers()$/;"	v
@@ -227,10 +313,14 @@ database	api.py	/^import database$/;"	i
 database	api_calls.py	/^except: import logger as database$/;"	i
 database	api_calls.py	/^try: import database$/;"	i
 database	bwmon.py	/^import database$/;"	i
+database	plugins/reservation.py	/^import database$/;"	i
 database	slivermanager.py	/^import database$/;"	i
 db	database.py	/^db = None$/;"	v
 db_cond	database.py	/^db_cond = threading.Condition(db_lock)$/;"	v
 db_lock	database.py	/^db_lock = threading.RLock()$/;"	v
+debug	plugins/reservation.py	/^    debug=False$/;"	v	class:reservation
+debug	plugins/reservation.py	/^    debug=True$/;"	v	class:reservation
+debug_box	plugins/reservation.py	/^    def debug_box(self,message,slicename=None):$/;"	m	class:reservation
 debuginfo	create_lxc.py	/^	def debuginfo(dom):$/;"	f
 debuginfo	sliver_libvirt.py	/^    def debuginfo(dom):$/;"	m	class:Sliver_Libvirt
 decodeCoreSpec	coresched_lxc.py	/^    def decodeCoreSpec (self, cores):$/;"	m	class:CoreSched
@@ -255,26 +345,37 @@ destroy	sliver_lxc.py	/^    def destroy(name):$/;"	m	class:Sliver_LXC
 destroy_sem	account.py	/^destroy_sem = threading.Semaphore(1)$/;"	v
 dev_default	bwmon.py	/^dev_default = tools.get_default_if()$/;"	v
 dev_default	net.py	/^dev_default = tools.get_default_if()$/;"	v
+disable_syndicate_mount	plugins/syndicate.py	/^def disable_syndicate_mount(sliver, mountpoint, syndicate_ip):$/;"	f
 dom	create_lxc.py	/^            dom = conn.defineXML(xml)$/;"	v
 dom	create_lxc.py	/^            dom = conn.lookupByName(name)$/;"	v
 dumpSlivers	nodemanager.py	/^    def dumpSlivers (self, slivers):$/;"	m	class:NodeManager
 dumpSlivers	nodemanager_origin.py	/^    def dumpSlivers (self, slivers):$/;"	m	class:NodeManager
 dump_requested	database.py	/^dump_requested = False$/;"	v
 dumps	ticket.py	/^from xmlrpclib import dumps, loads$/;"	i
+enable_syndicate_mount	plugins/syndicate.py	/^def enable_syndicate_mount(sliver, mountpoint, syndicate_ip):$/;"	f
 enforced_line	create_lxc.py	/^        enforced_line = "[ -f \/etc\/planetlab.profile ] && source \/etc\/planetlab.profile\\n"$/;"	v
 ensure_created	account.py	/^    def ensure_created(self, rec):$/;"	m	class:Worker
 ensure_destroyed	account.py	/^    def ensure_destroyed(self): self._destroy(self._get_class())$/;"	f
+ensure_slicebridge_created	plugins/privatebridge.py	/^def ensure_slicebridge_created(name, addr):$/;"	f
+ensure_slicebridge_neighbors	plugins/privatebridge.py	/^def ensure_slicebridge_neighbors(name, sliver_id, neighbors):$/;"	f
+ensure_timer	plugins/reservation.py	/^    def ensure_timer(self, now, timestamp):$/;"	m	class:reservation
+ensure_timer_from_until	plugins/reservation.py	/^    def ensure_timer_from_until (self, t1,t2):$/;"	m	class:reservation
 errno	api.py	/^import errno$/;"	i
 errno	api_calls.py	/^import errno$/;"	i
+errno	plugins/rawdisk.py	/^import errno$/;"	i
+errno	plugins/specialaccounts.py	/^import errno$/;"	i
 errno	tools.py	/^import errno$/;"	i
 export	api_calls.py	/^    def export(method):$/;"	f	function:export_to_api
 export	api_calls.py	/^    def export(method):$/;"	f	function:export_to_docbook
 export_to_api	api_calls.py	/^def export_to_api(nargs):$/;"	f
 export_to_docbook	api_calls.py	/^def export_to_docbook(**kwargs):$/;"	f
 fcntl	tools.py	/^import fcntl$/;"	i
+fetch_trigger_script_if_missing	plugins/omf_resctl.py	/^def fetch_trigger_script_if_missing (slicename):$/;"	f
+fields	SliceTags.py	/^    fields = {$/;"	v	class:SliceTag
 find_associated_memnode	coresched_lxc.py	/^    def find_associated_memnode(self, mems, cpu):$/;"	m	class:CoreSched
 find_compatible_cpu	coresched_lxc.py	/^    def find_compatible_cpu(self, cpus, compatCpu):$/;"	m	class:CoreSched
 find_cpu_mostsiblings	coresched_lxc.py	/^    def find_cpu_mostsiblings(self, cpus):$/;"	m	class:CoreSched
+find_tag	plugins/sliverauth.py	/^def find_tag (sliver, tagname):$/;"	f
 flush	logger.py	/^    def flush (self):$/;"	m	class:Buffer
 fork_as	tools.py	/^def fork_as(su, function, *args):$/;"	f
 format_bytes	bwmon.py	/^def format_bytes(bytes, si = True):$/;"	f
@@ -282,6 +383,7 @@ format_period	bwmon.py	/^def format_period(seconds):$/;"	f
 found	create_lxc.py	/^            found=False$/;"	v
 freezeUnits	coresched_lxc.py	/^    def freezeUnits (self, var_name, freezeList):$/;"	m	class:CoreSched
 from_root	create_lxc.py	/^            from_root=os.path.join(containerDir,path)$/;"	v
+generate_sshkey	plugins/sliverauth.py	/^def generate_sshkey (sliver): $/;"	f
 get	account.py	/^def get(name):$/;"	f
 getConnection	sliver_libvirt.py	/^    def getConnection(sliver_type):$/;"	m	class:Sliver_Libvirt
 getDefaults	bwmon.py	/^def getDefaults(nmdbcopy):$/;"	f
@@ -300,12 +402,14 @@ get_hwaddr_from_plnode	tools.py	/^def get_hwaddr_from_plnode():$/;"	f
 get_if_from_hwaddr	tools.py	/^def get_if_from_hwaddr(hwaddr):$/;"	f
 get_interfaces_xml	create_lxc.py	/^def get_interfaces_xml(rec):$/;"	f
 get_interfaces_xml	sliver_libvirt.py	/^    def get_interfaces_xml(rec):$/;"	m	class:Sliver_Libvirt
+get_keypair	plugins/sfagids.py	/^def get_keypair(config = None):$/;"	f
 get_memnode_cpus	coresched_lxc.py	/^    def get_memnode_cpus(self, index):$/;"	m	class:CoreSched
 get_mems	coresched_lxc.py	/^    def get_mems(self):$/;"	m	class:CoreSched
 get_node_virt	tools.py	/^def get_node_virt ():$/;"	f
 get_sliver_ifconfig	tools.py	/^def get_sliver_ifconfig(slice_name, device="eth0"):$/;"	f
 get_sliver_ip	tools.py	/^def get_sliver_ip(slice_name):$/;"	f
 get_sliver_process	tools.py	/^def get_sliver_process(slice_name, process_cmdline):$/;"	f
+get_unused_devices	plugins/rawdisk.py	/^def get_unused_devices():$/;"	f
 getgrnam	controller.py	/^from grp import getgrnam$/;"	i
 gethtbs	bwmon.py	/^def gethtbs(root_xid, default_xid):$/;"	f
 getpwnam	controller.py	/^from pwd import getpwnam$/;"	i
@@ -313,60 +417,85 @@ getpwnam	create_lxc.py	/^from pwd import getpwnam$/;"	i
 getpwnam	sliver_lxc.py	/^from pwd import getpwnam$/;"	i
 getslicemap	nodemanager.py	/^    def getslicemap(self,last_data):$/;"	m	class:NodeManager
 getslicemap	nodemanager_origin.py	/^    def getslicemap(self,last_data):$/;"	m	class:NodeManager
-getvip	nodemanager.py	/^    def getvip(self):$/;"	m	class:NodeManager
-getvlanid	nodemanager.py	/^    def getvlanid(self):$/;"	m	class:NodeManager
-getvmac	nodemanager.py	/^    def getvmac(self):$/;"	m	class:NodeManager
+getvip	GetPearl.py	/^    def getvip(self):$/;"	m	class:GetPearl
+getvip	SliceTags.py	/^    def getvip(self):$/;"	m	class:SliceTag
+getvlanid	GetPearl.py	/^    def getvlanid(self,slice_id,flag = 'none'):$/;"	m	class:GetPearl
+getvlanid	SliceTags.py	/^    def getvlanid(self,slice_id,flag = 'none'):$/;"	m	class:SliceTag
+getvmac	GetPearl.py	/^    def getvmac(self):$/;"	m	class:GetPearl
+getvmac	SliceTags.py	/^    def getvmac(self):$/;"	m	class:SliceTag
 glo_coresched_simulate	coresched_lxc.py	/^    glo_coresched_simulate = True$/;"	v	class:CoreSched
 glo_coresched_simulate	coresched_lxc.py	/^glo_coresched_simulate = False$/;"	v
-glob	nodemanager.py	/^import glob$/;"	i
 glob	nodemanager_origin.py	/^import glob$/;"	i
+glob	plugins/omf_resctl.py	/^import glob$/;"	i
+granularity	plugins/reservation.py	/^    def granularity (self):$/;"	m	class:reservation
+granularity_callback	plugins/reservation.py	/^    def granularity_callback (self, time_arg):$/;"	m	class:reservation
 grp	account.py	/^import pwd, grp$/;"	i
 grp	conf_files.py	/^import grp$/;"	i
 grp	create_lxc.py	/^import grp, pwd$/;"	i
+grp	plugins/specialaccounts.py	/^import grp$/;"	i
 grp	sliver_lxc.py	/^import grp$/;"	i
 handlemap	nodemanager.py	/^    def handlemap(self,slicemap,slicemapdb):$/;"	m	class:NodeManager
 handlemap	nodemanager_origin.py	/^    def handlemap(self,slicemap,slicemapdb):$/;"	m	class:NodeManager
 hmac	plcapi.py	/^import hmac$/;"	i
+httplib	plugins/privatebridge.py	/^import httplib$/;"	i
+httplib	plugins/syndicate.py	/^import httplib$/;"	i
 implementation	slivermanager.py	/^implementation='lxc'$/;"	v
+initevsliver	GetPearl.py	/^    def initevsliver(self,slice_id,node_id,vip,vmac,vlanid):$/;"	m	class:GetPearl
+initevsliver	SliceTags.py	/^    def initevsliver(self,slice_id,node_id,vip,vmac,vlanid):$/;"	m	class:SliceTag
 install_and_enable_vinit	initscript.py	/^    def install_and_enable_vinit (self):$/;"	m	class:Initscript
+install_gids	plugins/sfagids.py	/^def install_gids(api, slivers):$/;"	f
+install_trusted_certs	plugins/sfagids.py	/^def install_trusted_certs(api):$/;"	f
 interfaces	create_lxc.py	/^        interfaces = get_interfaces_xml(rec)$/;"	v
 iptables	net.py	/^import logger, iptables, tools$/;"	i
+isRunning	plugins/codemux.py	/^def isRunning():$/;"	f
 is_mounted	account.py	/^            def is_mounted (root_ssh):$/;"	f	function:Account._manage_ssh_dir
+is_omf_friendly	plugins/omf_resctl.py	/^    def is_omf_friendly (sliver):$/;"	f	function:GetSlivers
 is_running	account.py	/^    def is_running(self): pass$/;"	m	class:Account
 is_running	account.py	/^    def is_running(self):$/;"	f
 is_running	controller.py	/^    def is_running(self):$/;"	m	class:Controller
+is_running	plugins/reservation.py	/^    def is_running (self, slicename):$/;"	m	class:reservation
 is_running	sliver_libvirt.py	/^    def is_running(self):$/;"	m	class:Sliver_Libvirt
 is_running	slivermanager.py	/^def is_running (name):$/;"	f
 is_system_sliver	slivermanager.py	/^    def is_system_sliver (sliver):$/;"	f	function:adjustReservedSlivers
 joinpath	coresched_lxc.py	/^joinpath = os.path.join$/;"	v
 kill	curlwrapper.py	/^    def kill(self, signal = signal.SIGTERM):$/;"	m	class:Sopen
+lease_printable	plugins/reservation.py	/^    def lease_printable (lease):$/;"	m	class:reservation
 libvirt	create_lxc.py	/^import libvirt$/;"	i
 libvirt	sliver_libvirt.py	/^import libvirt$/;"	i
 libvirt	sliver_lxc.py	/^import libvirt$/;"	i
 libvirt	slivermanager.py	/^        import libvirt$/;"	i
 listToRange	coresched_lxc.py	/^    def listToRange (self, list):$/;"	m	class:CoreSched
+list_timers	plugins/reservation.py	/^    def list_timers(self):$/;"	m	class:reservation
 loadPearlConfig	nodemanager.py	/^    def loadPearlConfig(self):$/;"	m	class:NodeManager
 loadSlivers	nodemanager.py	/^    def loadSlivers (self):$/;"	m	class:NodeManager
 loadSlivers	nodemanager_origin.py	/^    def loadSlivers (self):$/;"	m	class:NodeManager
 loadmap	nodemanager.py	/^    def loadmap (self,slicemap):$/;"	m	class:NodeManager
 loadmap	nodemanager_origin.py	/^    def loadmap (self,slicemap):$/;"	m	class:NodeManager
-loadrouterid	nodemanager.py	/^    def loadrouterid(self):$/;"	m	class:NodeManager
 loads	ticket.py	/^from xmlrpclib import dumps, loads$/;"	i
-loadvip	nodemanager.py	/^    def loadvip(self):$/;"	m	class:NodeManager
-loadvlanid	nodemanager.py	/^    def loadvlanid(self):$/;"	m	class:NodeManager
-loadvmac	nodemanager.py	/^    def loadvmac(self):$/;"	m	class:NodeManager
+loadvip	GetPearl.py	/^    def loadvip(self):$/;"	m	class:GetPearl
+loadvip	SliceTags.py	/^    def loadvip(self):$/;"	m	class:SliceTag
+loadvlanid	GetPearl.py	/^    def loadvlanid(self):$/;"	m	class:GetPearl
+loadvlanid	SliceTags.py	/^    def loadvlanid(self):$/;"	m	class:SliceTag
+loadvmac	GetPearl.py	/^    def loadvmac(self):$/;"	m	class:GetPearl
+loadvmac	SliceTags.py	/^    def loadvmac(self):$/;"	m	class:SliceTag
+loadvsliver	GetPearl.py	/^    def loadvsliver(sefl):$/;"	m	class:GetPearl
+loadvsliver	SliceTags.py	/^    def loadvsliver(self):$/;"	m	class:SliceTag
 lock	bwmon.py	/^lock = threading.Event()$/;"	v
 log	logger.py	/^def log(msg,level=LOG_NODE):$/;"	f
 log_call	logger.py	/^def log_call(command,timeout=default_timeout_minutes*60,poll=1):$/;"	f
+log_call_read	plugins/privatebridge.py	/^def log_call_read(command,timeout=logger.default_timeout_minutes*60,poll=1):$/;"	f
 log_data_in_file	logger.py	/^def log_data_in_file (data, file, message="",level=LOG_NODE):$/;"	f
 log_database	logger.py	/^def log_database (db):$/;"	f
+log_db	logger.py	/^def log_db(data,filename):$/;"	f
 log_exc	logger.py	/^def log_exc(msg="",name=None):$/;"	f
 log_map	logger.py	/^def log_map(data,info):$/;"	f
 log_map_in_file	logger.py	/^def log_map_in_file (data, file, message="",level=LOG_NODE):$/;"	f
 log_missing_data	logger.py	/^def log_missing_data (msg,key):$/;"	f
-log_router	logger.py	/^def log_router(data,info):$/;"	f
+log_router	logger.py	/^def log_router(data,filename,info):$/;"	f
 log_slivers	logger.py	/^def log_slivers (data):$/;"	f
 log_trace	logger.py	/^def log_trace(msg="",name=None):$/;"	f
+logger	GetPearl.py	/^import logger$/;"	i
+logger	SliceTags.py	/^import logger$/;"	i
 logger	account.py	/^import logger$/;"	i
 logger	api.py	/^import logger$/;"	i
 logger	api_calls.py	/^import logger$/;"	i
@@ -383,6 +512,19 @@ logger	net.py	/^import logger, iptables, tools$/;"	i
 logger	nodemanager.py	/^import logger$/;"	i
 logger	nodemanager_origin.py	/^import logger$/;"	i
 logger	plcapi.py	/^import logger$/;"	i
+logger	plugins/codemux.py	/^import logger$/;"	i
+logger	plugins/hostmap.py	/^import logger$/;"	i
+logger	plugins/interfaces.py	/^import logger$/;"	i
+logger	plugins/omf_resctl.py	/^import logger$/;"	i
+logger	plugins/privatebridge.py	/^import logger$/;"	i
+logger	plugins/rawdisk.py	/^import logger$/;"	i
+logger	plugins/reservation.py	/^import logger$/;"	i
+logger	plugins/sfagids.py	/^import logger$/;"	i
+logger	plugins/sliverauth.py	/^import logger$/;"	i
+logger	plugins/specialaccounts.py	/^import logger$/;"	i
+logger	plugins/syndicate.py	/^import logger$/;"	i
+logger	plugins/vsys.py	/^import logger$/;"	i
+logger	plugins/vsys_privs.py	/^import logger$/;"	i
 logger	sliver_libvirt.py	/^import logger$/;"	i
 logger	sliver_lxc.py	/^import logger$/;"	i
 logger	slivermanager.py	/^import logger$/;"	i
@@ -390,15 +532,20 @@ logger	tools.py	/^import logger$/;"	i
 logmap	logger.py	/^def logmap(sliceid,vmid):$/;"	f
 logslice	logger.py	/^def logslice(msg,logfile):$/;"	f
 main	conf_files.py	/^    main = conf_files(options.noscripts)$/;"	v
+manage_hmac	plugins/sliverauth.py	/^def manage_hmac (plc, sliver):$/;"	f
+manage_sshkey	plugins/sliverauth.py	/^def manage_sshkey (plc, sliver):$/;"	f
 mount_ssh_dir	account.py	/^    def mount_ssh_dir (slicename): return Account._manage_ssh_dir (slicename, do_mount=True)$/;"	m	class:Account
 name_worker	account.py	/^name_worker = {}$/;"	v
 name_worker_lock	account.py	/^name_worker_lock = threading.Lock()$/;"	v
 nargs_dict	api_calls.py	/^nargs_dict = {}$/;"	v
 node_id	tools.py	/^def node_id():$/;"	f
 notify	bwmon.py	/^    def notify(self, new_maxrate, new_maxexemptrate, usedbytes, usedi2bytes):$/;"	m	class:Slice
+omf_rc_trigger_log	plugins/omf_resctl.py	/^omf_rc_trigger_log="\/var\/log\/plc_trigger_omf_rc.log"$/;"	v
+omf_rc_trigger_script	plugins/omf_resctl.py	/^omf_rc_trigger_script="\/usr\/bin\/plc_trigger_omf_rc"$/;"	v
 optparse	conf_files.py	/^    import optparse$/;"	i
 optparse	nodemanager.py	/^import optparse$/;"	i
 optparse	nodemanager_origin.py	/^import optparse$/;"	i
+os	SliceTags.py	/^import os$/;"	i
 os	account.py	/^import os$/;"	i
 os	api.py	/^import os$/;"	i
 os	api_calls.py	/^import os$/;"	i
@@ -415,18 +562,45 @@ os	logger.py	/^import os, sys$/;"	i
 os	net.py	/^import os, string, time, socket$/;"	i
 os	nodemanager.py	/^import os$/;"	i
 os	nodemanager_origin.py	/^import os$/;"	i
+os	plugins/codemux.py	/^import os$/;"	i
+os	plugins/hostmap.py	/^import os$/;"	i
+os	plugins/interfaces.py	/^import os$/;"	i
+os	plugins/omf_resctl.py	/^import os, os.path$/;"	i
+os	plugins/privatebridge.py	/^import os$/;"	i
+os	plugins/rawdisk.py	/^import os$/;"	i
+os	plugins/sfagids.py	/^import os$/;"	i
+os	plugins/sliverauth.py	/^import os$/;"	i
+os	plugins/specialaccounts.py	/^import os$/;"	i
+os	plugins/syndicate.py	/^import os$/;"	i
+os	plugins/vsys.py	/^import os$/;"	i
+os	plugins/vsys_privs.py	/^import os$/;"	i
 os	sliver_libvirt.py	/^import os, os.path$/;"	i
 os	sliver_lxc.py	/^import os, os.path$/;"	i
 os	tools.py	/^import os, os.path$/;"	i
+ovs_addbridge	plugins/privatebridge.py	/^def ovs_addbridge(name):$/;"	f
+ovs_addport	plugins/privatebridge.py	/^def ovs_addport(name, portname, type, remoteip, key):$/;"	f
+ovs_delbridge	plugins/privatebridge.py	/^def ovs_delbridge(name):$/;"	f
+ovs_delport	plugins/privatebridge.py	/^def ovs_delport(name, portname):$/;"	f
+ovs_listbridge	plugins/privatebridge.py	/^def ovs_listbridge():$/;"	f
+ovs_listports	plugins/privatebridge.py	/^def ovs_listports(name):$/;"	f
+ovs_vsctl	plugins/privatebridge.py	/^def ovs_vsctl(args):$/;"	f
+parseAcls	plugins/vsys.py	/^def parseAcls():$/;"	f
+parseConf	plugins/codemux.py	/^def parseConf(conf = CODEMUXCONF):$/;"	f
+parseConf	plugins/vsys.py	/^def parseConf():$/;"	f
 parser	conf_files.py	/^    parser = optparse.OptionParser()$/;"	v
 path	cgroups.py	/^	path = os.path.join(event.path, event.name)$/;"	v	class:CgroupWatch
 path	create_lxc.py	/^import os, os.path$/;"	i
 path	initscript.py	/^import os, os.path$/;"	i
+path	plugins/omf_resctl.py	/^import os, os.path$/;"	i
 path	sliver_libvirt.py	/^import os, os.path$/;"	i
 path	sliver_lxc.py	/^import os, os.path$/;"	i
 path	tools.py	/^import os, os.path$/;"	i
 period	bwmon.py	/^period = 1 * seconds_per_day$/;"	v
+persistent_data	plugins/reservation.py	/^persistent_data = True$/;"	v
+pickle	GetPearl.py	/^import pickle$/;"	i
+pickle	SliceTags.py	/^import pickle$/;"	i
 pickle	bwmon.py	/^import pickle$/;"	i
+pickle	logger.py	/^import pickle$/;"	i
 pickle	nodemanager.py	/^import pickle$/;"	i
 pickle	nodemanager_origin.py	/^import pickle$/;"	i
 pid_file	tools.py	/^def pid_file():$/;"	f
@@ -441,9 +615,14 @@ plnode	sliver_lxc.py	/^import plnode.bwlimit as bwlimit$/;"	i
 pprint	config.py	/^    from pprint import pprint$/;"	i
 pprint	logger.py	/^    import pprint, time$/;"	i
 pprint	sliver_libvirt.py	/^import pprint$/;"	i
+primary_key	SliceTags.py	/^    primary_key = 'slice_tag_id'$/;"	v	class:SliceTag
 priority	bwmon.py	/^priority = 20$/;"	v
 priority	conf_files.py	/^priority = 2$/;"	v
 priority	net.py	/^priority=1$/;"	v
+priority	plugins/omf_resctl.py	/^priority = 150$/;"	v
+priority	plugins/privatebridge.py	/^priority = 9$/;"	v
+priority	plugins/reservation.py	/^priority = 45$/;"	v
+priority	plugins/specialaccounts.py	/^priority = 3$/;"	v
 priority	slivermanager.py	/^priority=10$/;"	v
 process_IN_CREATE	cgroups.py	/^    def process_IN_CREATE(self, event):$/;"	m	class:CgroupWatch
 process_IN_DELETE	cgroups.py	/^    def process_IN_DELETE(self, event):$/;"	m	class:CgroupWatch
@@ -452,15 +631,21 @@ pwd	api.py	/^import pwd$/;"	i
 pwd	api_calls.py	/^import pwd$/;"	i
 pwd	conf_files.py	/^import pwd$/;"	i
 pwd	create_lxc.py	/^import grp, pwd$/;"	i
+pwd	plugins/specialaccounts.py	/^import pwd$/;"	i
 pwd	tools.py	/^import pwd$/;"	i
 pyinotify	cgroups.py	/^import pyinotify$/;"	i
 random	nodemanager.py	/^import random$/;"	i
 random	nodemanager_origin.py	/^import random$/;"	i
+random	plugins/sliverauth.py	/^import random$/;"	i
+random	plugins/specialaccounts.py	/^import random$/;"	i
 rcreatesliver	nodemanager.py	/^    def rcreatesliver(self,sliver,plc):$/;"	m	class:NodeManager
 rcreatesliver	nodemanager_origin.py	/^    def rcreatesliver(self,sliver):$/;"	m	class:NodeManager
 rdeletesliver	nodemanager.py	/^    def rdeletesliver(self,sliver):$/;"	m	class:NodeManager
 rdeletesliver	nodemanager_origin.py	/^    def rdeletesliver(self,sliver):$/;"	m	class:NodeManager
+re	plugins/hostmap.py	/^import re$/;"	i
+re	plugins/rawdisk.py	/^import re$/;"	i
 re	slivermanager.py	/^import string,re$/;"	i
+read_privs	plugins/vsys_privs.py	/^def read_privs():$/;"	f
 rec_sl_test1	coresched_lxc.py	/^    rec_sl_test1 = {"_rspec": rspec_sl_test1}$/;"	v	class:CoreSched
 rec_sl_test2	coresched_lxc.py	/^    rec_sl_test2 = {"_rspec": rspec_sl_test2}$/;"	v	class:CoreSched
 rec_sl_test3	coresched_lxc.py	/^    rec_sl_test3 = {"_rspec": rspec_sl_test3}$/;"	v	class:CoreSched
@@ -470,11 +655,15 @@ release	tools.py	/^    def release(self):$/;"	m	class:NMLock
 replace_file_with_string	tools.py	/^def replace_file_with_string (target, new_contents, chmod=None, remove_if_empty=False):$/;"	f
 request	safexmlrpc.py	/^    def request(self, host, handler, request_body, verbose=0):$/;"	m	class:CertificateCheckingSafeTransport
 rerun_slice_vinit	sliver_lxc.py	/^    def rerun_slice_vinit (self):$/;"	m	class:Sliver_LXC
+reservation	plugins/reservation.py	/^class reservation:$/;"	c
 reserveDefault	coresched_lxc.py	/^    def reserveDefault (self, var_name, cpus):$/;"	m	class:CoreSched
 reserveUnits	coresched_lxc.py	/^    def reserveUnits (self, var_name, reservations):$/;"	m	class:CoreSched
 reset	bwmon.py	/^    def reset(self, runningrates, rspec):$/;"	m	class:Slice
-resource	nodemanager.py	/^import resource$/;"	i
 resource	nodemanager_origin.py	/^import resource$/;"	i
+restart	sliver-initscripts/initscript-template.sh	/^function restart () {$/;"	f
+restart	sliver-initscripts/vinit	/^function restart () {$/;"	f
+restartService	plugins/codemux.py	/^def restartService():$/;"	f
+restart_slice	plugins/reservation.py	/^    def restart_slice(self, slicename):$/;"	m	class:reservation
 retrieve	curlwrapper.py	/^def retrieve(url, cacert=None, postdata=None, timeout=90):$/;"	f
 returns	api_calls.py	/^                    returns=[Mixed(Parameter(str, 'recipient slice name'),$/;"	v
 returns	api_calls.py	/^                    returns={"resource name" : Parameter(int, "amount")})$/;"	v
@@ -483,6 +672,7 @@ returns	api_calls.py	/^                   returns=Parameter(dict, 'Record dictio
 returns	api_calls.py	/^                   returns=Parameter(int, '1 if successful'))$/;"	v
 returns	api_calls.py	/^                   returns={'sliver_name' : Parameter(int, 'the associated xid')})$/;"	v
 root_context_arch	tools.py	/^def root_context_arch():$/;"	f
+round_time	plugins/reservation.py	/^    def round_time (self, time):$/;"	m	class:reservation
 rspec_sl_test1	coresched_lxc.py	/^    rspec_sl_test1 = {"cpu_cores": "1"}$/;"	v	class:CoreSched
 rspec_sl_test2	coresched_lxc.py	/^    rspec_sl_test2 = {"cpu_cores": "5"}$/;"	v	class:CoreSched
 rspec_sl_test3	coresched_lxc.py	/^    rspec_sl_test3 = {"cpu_cores": "3b"}$/;"	v	class:CoreSched
@@ -499,13 +689,18 @@ rupdatesliver	nodemanager_origin.py	/^    def rupdatesliver(self,sliver):$/;"	m	
 safexmlrpc	plcapi.py	/^import safexmlrpc$/;"	i
 savemap	nodemanager.py	/^    def savemap (self, slicemap):$/;"	m	class:NodeManager
 savemap	nodemanager_origin.py	/^    def savemap (self, slicemap):$/;"	m	class:NodeManager
-saverouterid	nodemanager.py	/^    def saverouterid (self, router):$/;"	m	class:NodeManager
-savevip	nodemanager.py	/^    def savevip (self, vip):$/;"	m	class:NodeManager
-savevlanid	nodemanager.py	/^    def savevlanid (self, vid):$/;"	m	class:NodeManager
-savevmac	nodemanager.py	/^    def savevmac (self, vmac):$/;"	m	class:NodeManager
+savevip	GetPearl.py	/^    def savevip (self, vip):$/;"	m	class:GetPearl
+savevip	SliceTags.py	/^    def savevip (self, vip):$/;"	m	class:SliceTag
+savevlanid	GetPearl.py	/^    def savevlanid (self, vid):$/;"	m	class:GetPearl
+savevlanid	SliceTags.py	/^    def savevlanid (self, vid):$/;"	m	class:SliceTag
+savevmac	GetPearl.py	/^    def savevmac (self, vmac):$/;"	m	class:GetPearl
+savevmac	SliceTags.py	/^    def savevmac (self, vmac):$/;"	m	class:SliceTag
+savevsliver	GetPearl.py	/^    def savevsliver(self,vsliver):$/;"	m	class:GetPearl
+savevsliver	SliceTags.py	/^    def savevsliver(self,vsliver):$/;"	m	class:SliceTag
 seconds_per_day	bwmon.py	/^seconds_per_day = 24 * 60 * 60$/;"	v
 select	curlwrapper.py	/^from select import select$/;"	i
 select	logger.py	/^import select$/;"	i
+select	plugins/privatebridge.py	/^import select$/;"	i
 session	conf_files.py	/^        session = file(options.session).read().strip()$/;"	v
 session	conf_files.py	/^        session = options.session$/;"	v
 setSliversVref	nodemanager.py	/^    def setSliversVref (self, data):$/;"	m	class:NodeManager
@@ -513,11 +708,20 @@ setSliversVref	nodemanager_origin.py	/^    def setSliversVref (self, data):$/;"	
 set_level	logger.py	/^def set_level(level):$/;"	f
 set_min_timestamp	database.py	/^    def set_min_timestamp(self, ts):$/;"	f
 setns	tools.py	/^    import setns$/;"	i
+sfa	plugins/sfagids.py	/^    import sfa.util.xmlrpcprotocol as xmlrpcprotocol$/;"	i
+sfa	plugins/sfagids.py	/^    sfa = None$/;"	v
+sfa	plugins/sfagids.py	/^    sfa = True      $/;"	v
 sha	conf_files.py	/^    from hashlib import sha1 as sha$/;"	i
 sha	conf_files.py	/^    from sha import sha$/;"	i
 sha	plcapi.py	/^    from hashlib import sha1 as sha$/;"	i
 sha	plcapi.py	/^    import sha$/;"	i
+sha	plugins/hostmap.py	/^    from hashlib import sha1 as sha$/;"	i
+sha	plugins/hostmap.py	/^    from sha import sha$/;"	i
+sha	plugins/interfaces.py	/^    from hashlib import sha1 as sha$/;"	i
+sha	plugins/interfaces.py	/^    from sha import sha$/;"	i
 shell_acct_class	account.py	/^shell_acct_class = {}$/;"	v
+shutil	plugins/privatebridge.py	/^import shutil$/;"	i
+shutil	plugins/syndicate.py	/^import shutil$/;"	i
 shutil	tools.py	/^import shutil$/;"	i
 sign	ticket.py	/^def sign(data):$/;"	f
 signal	curlwrapper.py	/^import signal$/;"	i
@@ -529,13 +733,15 @@ sliver_default_type	slivermanager.py	/^sliver_default_type='sliver.LXC'$/;"	v
 sliver_lxc	slivermanager.py	/^import sliver_lxc$/;"	i
 sliver_password_shell	slivermanager.py	/^sliver_password_shell = sliver_lxc.Sliver_LXC.SHELL$/;"	v
 slivermanager	api_calls.py	/^import slivermanager$/;"	i
+slivermanager	plugins/codemux.py	/^import slivermanager$/;"	i
 slivers	coresched_lxc.py	/^    slivers = {"arizona_beta": rec_sl_test1, "arizona_test101": rec_sl_test2, "pl_sirius": rec_sl_test3}$/;"	v	class:CoreSched
 socket	api.py	/^import socket$/;"	i
 socket	api_calls.py	/^import socket$/;"	i
 socket	bwmon.py	/^import socket$/;"	i
 socket	net.py	/^import os, string, time, socket$/;"	i
-socket	nodemanager.py	/^import socket$/;"	i
 socket	nodemanager_origin.py	/^import socket$/;"	i
+socket	plugins/sliverauth.py	/^import socket$/;"	i
+sortDomains	plugins/codemux.py	/^def sortDomains(slivers):$/;"	f
 sort_module_priority	nodemanager.py	/^            def sort_module_priority (m1,m2):$/;"	f	function:NodeManager.run
 sort_module_priority	nodemanager_origin.py	/^            def sort_module_priority (m1,m2):$/;"	f	function:NodeManager.run
 start	account.py	/^    def start(self, delay=0): pass$/;"	m	class:Account
@@ -545,15 +751,38 @@ start	bwmon.py	/^def start(*args):$/;"	f
 start	conf_files.py	/^def start(): pass$/;"	f
 start	database.py	/^def start():$/;"	f
 start	net.py	/^def start():$/;"	f
+start	plugins/codemux.py	/^def start():$/;"	f
+start	plugins/hostmap.py	/^def start():$/;"	f
+start	plugins/interfaces.py	/^def start():$/;"	f
+start	plugins/omf_resctl.py	/^def start():$/;"	f
+start	plugins/privatebridge.py	/^def start():$/;"	f
+start	plugins/rawdisk.py	/^def start():$/;"	f
+start	plugins/reservation.py	/^    def start(self):$/;"	m	class:reservation
+start	plugins/reservation.py	/^def start():$/;"	f
+start	plugins/sfagids.py	/^def start():$/;"	f
+start	plugins/sliverauth.py	/^def start():$/;"	f
+start	plugins/specialaccounts.py	/^def start():$/;"	f
+start	plugins/syndicate.py	/^def start():$/;"	f
+start	plugins/vsys.py	/^def start():$/;"	f
+start	plugins/vsys_privs.py	/^def start():$/;"	f
+start	sliver-initscripts/initscript-template.sh	/^function start () {$/;"	f
+start	sliver-initscripts/vinit	/^function start() {$/;"	f
 start	sliver_libvirt.py	/^    def start(self, delay=0):$/;"	m	class:Sliver_Libvirt
 start	sliver_lxc.py	/^    def start(self, delay=0):$/;"	m	class:Sliver_LXC
 start	slivermanager.py	/^def start():$/;"	f
+startService	plugins/codemux.py	/^def startService():$/;"	f
 start_requested	slivermanager.py	/^start_requested = False  # set to True in order to request that all slivers be started$/;"	v
+status	sliver-initscripts/vinit	/^function status () {$/;"	f
 stop	account.py	/^    def stop(self): pass$/;"	m	class:Account
 stop	account.py	/^    def stop(self): self._acct.stop()$/;"	f
+stop	sliver-initscripts/initscript-template.sh	/^function stop () {$/;"	f
+stop	sliver-initscripts/vinit	/^function stop() {$/;"	f
 stop	sliver_libvirt.py	/^    def stop(self):$/;"	m	class:Sliver_Libvirt
+stopService	plugins/codemux.py	/^def stopService():$/;"	f
 string	conf_files.py	/^import string$/;"	i
 string	net.py	/^import os, string, time, socket$/;"	i
+string	plugins/sliverauth.py	/^import string$/;"	i
+string	plugins/specialaccounts.py	/^import string$/;"	i
 string	slivermanager.py	/^import string,re$/;"	i
 struct	api.py	/^import struct$/;"	i
 struct	api_calls.py	/^import struct$/;"	i
@@ -561,32 +790,50 @@ subprocess	account.py	/^import subprocess$/;"	i
 subprocess	create_lxc.py	/^import subprocess$/;"	i
 subprocess	iptables.py	/^import subprocess$/;"	i
 subprocess	logger.py	/^import subprocess$/;"	i
+subprocess	plugins/hostmap.py	/^import subprocess$/;"	i
+subprocess	plugins/interfaces.py	/^import subprocess$/;"	i
+subprocess	plugins/omf_resctl.py	/^import subprocess$/;"	i
+subprocess	plugins/privatebridge.py	/^import subprocess$/;"	i
 subprocess	sliver_libvirt.py	/^import subprocess$/;"	i
 subprocess	sliver_lxc.py	/^import subprocess$/;"	i
 subprocess	tools.py	/^import subprocess$/;"	i
+suspend_all_slices	plugins/reservation.py	/^    def suspend_all_slices (self, exclude=[]):$/;"	m	class:reservation
+suspend_slice	plugins/reservation.py	/^    def suspend_slice(self, slicename):$/;"	m	class:reservation
 sync	bwmon.py	/^def sync(nmdbcopy):$/;"	f
 sync	database.py	/^    def sync(self):$/;"	f
 sync_fn	database.py	/^    def sync_fn(*args, **kw_args):$/;"	f	function:synchronized
+sync_timers_from_leases	plugins/reservation.py	/^    def sync_timers_from_leases (self):$/;"	m	class:reservation
 synchronized	database.py	/^def synchronized(fn):$/;"	f
+syndicate_op	plugins/syndicate.py	/^def syndicate_op(op, mountpoint, syndicate_ip):$/;"	f
+sys	SliceTags.py	/^import sys$/;"	i
 sys	api.py	/^import sys$/;"	i
 sys	bwmon.py	/^import sys$/;"	i
 sys	create_lxc.py	/^import sys$/;"	i
 sys	logger.py	/^import os, sys$/;"	i
 sys	nodemanager.py	/^import sys$/;"	i
 sys	nodemanager_origin.py	/^import sys$/;"	i
+sys	plugins/sfagids.py	/^import sys$/;"	i
 sys	sliver_libvirt.py	/^import sys$/;"	i
 sys	sliver_lxc.py	/^import sys$/;"	i
 sys	tools.py	/^import sys$/;"	i
 system	conf_files.py	/^    def system(self, cmd):$/;"	m	class:conf_files
+table_name	SliceTags.py	/^    table_name = 'slice_tag'$/;"	v	class:SliceTag
+tempfile	plugins/sfagids.py	/^import tempfile$/;"	i
+tempfile	plugins/sliverauth.py	/^import tempfile$/;"	i
+tempfile	plugins/specialaccounts.py	/^import tempfile$/;"	i
 tempfile	tools.py	/^import tempfile$/;"	i
 template	create_lxc.py	/^                template = Template(f.read())$/;"	v
 template_filename	create_lxc.py	/^            template_filename=template_filename_sliceimage$/;"	v
 template_filename_sliceimage	create_lxc.py	/^        template_filename_sliceimage = os.path.join('\/vservers\/.lvref','lxc_template.xml')$/;"	v
+test_slivers	plugins/sfagids.py	/^    test_slivers = {'slivers': [$/;"	v
+test_slivers	plugins/vsys_privs.py	/^    test_slivers = {'slivers':[$/;"	v
+this_closure	plugins/reservation.py	/^        def this_closure ():$/;"	f	function:reservation.ensure_timer
 threading	account.py	/^import threading$/;"	i
 threading	api.py	/^import threading$/;"	i
 threading	api_calls.py	/^import threading$/;"	i
 threading	bwmon.py	/^import threading$/;"	i
 threading	database.py	/^import threading$/;"	i
+threading	plugins/reservation.py	/^import threading$/;"	i
 threading	tools.py	/^import threading$/;"	i
 ticket_module	api_calls.py	/^import ticket as ticket_module$/;"	i
 time	bwmon.py	/^import time$/;"	i
@@ -597,8 +844,13 @@ time	logger.py	/^import time$/;"	i
 time	net.py	/^import os, string, time, socket$/;"	i
 time	nodemanager.py	/^import time$/;"	i
 time	nodemanager_origin.py	/^import time$/;"	i
+time	plugins/privatebridge.py	/^import time$/;"	i
+time	plugins/rawdisk.py	/^import time$/;"	i
+time	plugins/reservation.py	/^            import time$/;"	i
+time	plugins/reservation.py	/^import time$/;"	i
 time	sliver_lxc.py	/^import time$/;"	i
 time	slivermanager.py	/^import time$/;"	i
+time_printable	plugins/reservation.py	/^    def time_printable (timestamp):$/;"	m	class:reservation
 tools	account.py	/^import tools$/;"	i
 tools	api.py	/^import tools$/;"	i
 tools	api_calls.py	/^import tools$/;"	i
@@ -611,19 +863,31 @@ tools	initscript.py	/^import tools$/;"	i
 tools	net.py	/^import logger, iptables, tools$/;"	i
 tools	nodemanager.py	/^import tools$/;"	i
 tools	nodemanager_origin.py	/^import tools$/;"	i
+tools	plugins/omf_resctl.py	/^import tools$/;"	i
+tools	plugins/privatebridge.py	/^import tools$/;"	i
+tools	plugins/rawdisk.py	/^import tools$/;"	i
+tools	plugins/sliverauth.py	/^import tools$/;"	i
+tools	plugins/specialaccounts.py	/^import tools$/;"	i
+tools	plugins/syndicate.py	/^import tools$/;"	i
+touchAcls	plugins/vsys.py	/^def touchAcls():$/;"	f
 traceback	logger.py	/^import traceback$/;"	i
+traceback	plugins/omf_resctl.py	/^                import traceback$/;"	i
+traceback	plugins/sfagids.py	/^import traceback$/;"	i
 type_acct_class	account.py	/^type_acct_class = {}$/;"	v
 umount_ssh_dir	account.py	/^    def umount_ssh_dir (slicename): return Account._manage_ssh_dir (slicename, do_mount=False)$/;"	m	class:Account
 update	bwmon.py	/^    def update(self, runningrates, rspec):$/;"	m	class:Slice
 updateSliceTags	bwmon.py	/^    def updateSliceTags(self, rspec):$/;"	m	class:Slice
 update_conf_file	conf_files.py	/^    def update_conf_file(self, cf_rec):$/;"	m	class:conf_files
 update_session	plcapi.py	/^    def update_session(self, f="\/usr\/boot\/plnode.txt"):$/;"	m	class:PLCAPI
-updaterouterid	nodemanager.py	/^    def updaterouterid(self,id):$/;"	m	class:NodeManager
 updatetoRouter	nodemanager.py	/^    def updatetoRouter(self,slicemapdb,plc): $/;"	m	class:NodeManager
 updatetoRouter	nodemanager_origin.py	/^    def updatetoRouter(self,slicemapdb): $/;"	m	class:NodeManager
-updatevip	nodemanager.py	/^    def updatevip(self,ip):$/;"	m	class:NodeManager
-updatevlanid	nodemanager.py	/^    def updatevlanid(self,vid):$/;"	m	class:NodeManager
-updatevmac	nodemanager.py	/^    def updatevmac(self,mac):$/;"	m	class:NodeManager
+updatevip	GetPearl.py	/^    def updatevip(self,ip):$/;"	m	class:GetPearl
+updatevip	SliceTags.py	/^    def updatevip(self,ip):$/;"	m	class:SliceTag
+updatevlanid	GetPearl.py	/^    def updatevlanid(self,vid):$/;"	m	class:GetPearl
+updatevlanid	SliceTags.py	/^    def updatevlanid(self,vid):$/;"	m	class:SliceTag
+updatevmac	GetPearl.py	/^    def updatevmac(self,mac):$/;"	m	class:GetPearl
+updatevmac	SliceTags.py	/^    def updatevmac(self,mac):$/;"	m	class:SliceTag
+util	plugins/sfagids.py	/^    import sfa.util.xmlrpcprotocol as xmlrpcprotocol$/;"	i
 validate_loan	api_calls.py	/^    def validate_loan(loan):$/;"	f	function:validate_loans
 validate_loans	api_calls.py	/^def validate_loans(loans):$/;"	f
 verbose	curlwrapper.py	/^verbose=False$/;"	v
@@ -633,7 +897,11 @@ virt_stamp	tools.py	/^virt_stamp="\/etc\/planetlab\/virt"$/;"	v
 vserver	slivermanager.py	/^        import vserver$/;"	i
 wrapper	plcapi.py	/^        def wrapper(*params):$/;"	f	function:PLCAPI.add_auth
 write	cgroups.py	/^def write(name, key, value, subsystem="cpuset"):$/;"	f
+writeAcls	plugins/vsys.py	/^def writeAcls(currentscripts, oldscripts):$/;"	f
+writeConf	plugins/codemux.py	/^def writeConf(slivers, conf = CODEMUXCONF):$/;"	f
+writeConf	plugins/vsys.py	/^def writeConf(slivers, oldslivers):$/;"	f
 write_file	tools.py	/^def write_file(filename, do_write, **kw_args):$/;"	f
+write_privs	plugins/vsys_privs.py	/^def write_privs(cur_privs,privs):$/;"	f
 write_temp_file	tools.py	/^def write_temp_file(do_write, mode=None, uidgid=None):$/;"	f
 x	coresched_lxc.py	/^    x = CoreSched()$/;"	v	class:CoreSched
 xid	create_lxc.py	/^        xid = bwlimit.get_xid(name)$/;"	v
@@ -642,6 +910,10 @@ xmlrpclib	api.py	/^import xmlrpclib$/;"	i
 xmlrpclib	api_calls.py	/^import xmlrpclib$/;"	i
 xmlrpclib	conf_files.py	/^import xmlrpclib$/;"	i
 xmlrpclib	curlwrapper.py	/^import xmlrpclib$/;"	i
-xmlrpclib	nodemanager.py	/^import xmlrpclib$/;"	i
 xmlrpclib	nodemanager_origin.py	/^import xmlrpclib$/;"	i
+xmlrpclib	plugins/hostmap.py	/^import xmlrpclib$/;"	i
+xmlrpclib	plugins/interfaces.py	/^import xmlrpclib$/;"	i
 xmlrpclib	safexmlrpc.py	/^import xmlrpclib$/;"	i
+xmlrpcprotocol	plugins/sfagids.py	/^    import sfa.util.xmlrpcprotocol as xmlrpcprotocol$/;"	i
+yaml_slice_path	plugins/omf_resctl.py	/^yaml_slice_path="\/etc\/omf_rc\/config.yml"$/;"	v
+yum_install	sliver-initscripts/initscript-template.sh	/^function yum_install () {$/;"	f

@@ -6,12 +6,14 @@ import time
 import traceback
 import subprocess
 import select
+import pickle
 
 LOG_FILE    = '/var/log/nodemanager'
 LOG_SLIVERS = '/var/lib/nodemanager/getslivers.txt'
 LOG_DATABASE = '/var/lib/nodemanager/database.txt'
 LOG_MAP = '/var/log/slice/map.txt'
 LOG_ROUTER = '/var/log/slice/router.txt'
+LOG_PATH = '/var/log/slice/'
 
 # basically define 3 levels
 LOG_NONE=0
@@ -113,7 +115,7 @@ def log_map_in_file (data, file, message="",level=LOG_NODE):
         return
     import pprint, time
     try:
-        f=open(file,'a')
+        f=open(file,'w')
         now=time.strftime("Last update: %Y.%m.%d at %H:%M:%S %Z", time.localtime())
         f.write(now+'\n')
         if message: f.write('Message:'+message+'\n')
@@ -133,8 +135,14 @@ def log_map(data,info):
     log_map_in_file (data, LOG_MAP, info)
 
 #wangyang
-def log_router(data,info):
-    log_map_in_file (data, LOG_ROUTER, info)
+def log_router(data,filename,info):
+    log_map_in_file (data, LOG_PATH+filename, info)
+def log_db(data,filename):
+    f=open(file,'w')
+    pickle.dump(date, f)
+    f.close()
+
+    
 #################### child processes
 # avoid waiting until the process returns;
 # that makes debugging of hanging children hard
