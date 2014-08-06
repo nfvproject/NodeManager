@@ -36,11 +36,11 @@ class NodeManager:
 
     MAP_FILE = "/var/lib/nodemanager/slicemap.pickle"
     
-    ROUTER_FILE = "/var/lib/myplc/router.pickle"
-    VSLIVER_FILE = "/var/lib/myplc/vsliver.pickle"
-    VIP_FILE = "/var/lib/myplc/vip.pickle"
-    VMAC_FILE = "/var/lib/myplc/vmac.pickle"
-    VLANID_FILE = "/var/lib/myplc/vlanid.pickle"
+    ROUTER_FILE = "/var/lib/nodemanager/router.pickle"
+    VSLIVER_FILE = "/var/lib/nodemanager/vsliver.pickle"
+    VIP_FILE = "/var/lib/nodemanager/vip.pickle"
+    VMAC_FILE = "/var/lib/nodemanager/vmac.pickle"
+    VLANID_FILE = "/var/lib/nodemanager/vlanid.pickle"
     PEARL_DPID = 1
     NODE_ID = 32
 
