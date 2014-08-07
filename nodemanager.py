@@ -246,7 +246,7 @@ class NodeManager:
         vrp.disksize = 2
         logger.log ("nodemanager:vrp is %s"%vrp)
         logger.log ("nodemanager:creatVirtualMachine")
- 
+        """
         # create vm, and start it, get the [ip:port]
         self.pearl.service.creatVirtualMachine(vrp)
             
@@ -312,7 +312,7 @@ class NodeManager:
             logger.log ("nodemanager: Start Virtual Router vm - %s, vr - %s end" %(vmname, vrname))
         except Exception as e:
             logger.log ("nodemanager: Create Virtual Router Error:", e)
-        """
+        
     def rdeletesliver(self,sliver):
         #self.updatevip(sliver['vip'])
         #self.updatevmac(sliver['vmac'])
