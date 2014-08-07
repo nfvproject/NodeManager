@@ -231,6 +231,7 @@ class NodeManager:
         #sliver['vlanid'] = self.getvlanid()
         logfile = '/var/log/slice/log'
         logger.logslice("(sliceid: %s,vrouteid: %s,vip: %s,vmac:%s,vlanid:%s)  create"%(sliver['slice_id'],sliver['vrname'],sliver['vip'],sliver['vmac'],sliver['vlanid']),logfile)
+        logger.log ("nodemanager: prepare to call router API,slice is %d - end"%sliver['slice_id'])
         #call router API
         vrp = self.pearl.factory.create('ns1:creatVirtualRouterParam')
         #vrp.name = 'vm_slice' + str(sliver['slice_id'])
