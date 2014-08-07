@@ -265,8 +265,9 @@ class NodeManager:
 	logger.log ("nodemanager: Report sliver port, node_id - %s,slice_id - %s,port - %s" %(self.NODE_ID,sliver['slice_id'], ipport[1]))
 
         # update the user keys to vm
-        vmname = 'vm_slice' + str(sliver['slice_id'])
-        vrname = 'vr_slice' + str(sliver['slice_id'])
+        vmname = sliver['vrname']
+        vrname = 'vr_' + str(sliver['slice_name'])
+
         for key in sliver['keys']:
             #logger.log("nodemanager: keys %s"%(key['key']))
             self.pearl.service.assignVirtualRouter(vrname, vmname, key['key'])
