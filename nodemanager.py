@@ -223,19 +223,19 @@ class NodeManager:
     #wangyang,add,delete,update sliver to router,here just write log    
     def rcreatesliver(self,sliver,plc):
 
-        #sliver['vrname'] = str(NodeManager.PEARL_DPID) + str(sliver['slice_id'])
+        sliver['vrname'] = 'vm_' + str(sliver['slice_name'])
         #wangyangv2,get this from myplc
         #sliver['vip'] = self.getvip()
         #wangyangv2,get this from myplc
         #sliver['vmac'] = self.getvmac()
         #sliver['vlanid'] = self.getvlanid()
         logfile = '/var/log/slice/log'
-        logger.logslice("(sliceid: %s,vrouteid: %s,vip: %s,vmac:%s,vlanid:%s)  create"%(sliver['slice_id'],sliver['vrname'],sliver['vip'],sliver['vmac'],sliver['vlanid']),logfile)
+        logger.logslice("(sliceid: %s,vrname: %s,vip: %s,vmac:%s,vlanid:%s)  create"%(sliver['slice_id'],sliver['vrname'],sliver['vip'],sliver['vmac'],sliver['vlanid']),logfile)
         logger.log ("nodemanager: prepare to call router API,slice is %d - end"%sliver['slice_id'])
         #call router API
         vrp = self.pearl.factory.create('ns1:creatVirtualRouterParam')
         #vrp.name = 'vm_slice' + str(sliver['slice_id'])
-        vrp.name = 'vm_' + str(sliver['slice_name'])
+        vrp.name = sliver['vrname']
         sliver['vrname'] = vrp.name
         vrp.memory = 1024*1024
         vrp.currentMemory = vrp.memory
