@@ -233,17 +233,20 @@ class NodeManager:
         logger.logslice("(sliceid: %s,vrname: %s,vip: %s,vmac:%s,vlanid:%s)  create"%(sliver['slice_id'],sliver['vrname'],sliver['vip'],sliver['vmac'],sliver['vlanid']),logfile)
         logger.log ("nodemanager: prepare to call router API,slice is %d - end"%sliver['slice_id'])
         #call router API
+        logger.log ("nodemanager:factory.create")
+
         vrp = self.pearl.factory.create('ns1:creatVirtualRouterParam')
         #vrp.name = 'vm_slice' + str(sliver['slice_id'])
         vrp.name = sliver['vrname']
-        sliver['vrname'] = vrp.name
         vrp.memory = 1024*1024
         vrp.currentMemory = vrp.memory
         vrp.vcpu = 1
         vrp.ip = sliver['vip']
         vrp.mac = sliver['vmac']
         vrp.disksize = 2
-        
+        logger.log ("nodemanager:vrp is %s"%vrp)
+        logger.log ("nodemanager:creatVirtualMachine")
+ 
         # create vm, and start it, get the [ip:port]
         try:
             self.pearl.service.creatVirtualMachine(vrp)

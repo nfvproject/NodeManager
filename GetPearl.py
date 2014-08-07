@@ -82,17 +82,40 @@ class GetPearl():
             self.savevsliver(vsliver)  
         return vlanid
     @staticmethod
-    def FreePearlTag(self,slice_id,node_id):
+    def FreeVip(self,slice_id,node_id):
         vslivers = self.loadvsliver()
+        flag = 0
         for vsliver in vslivers[:]:
             if vsliver['slice_id'] == slice_id and vsliver['node_id'] == node_id:
                 self.updatevip(vsliver['vip'])
-                self.updatevmac(vsliver['vmac'])
+                vsliver['vip'] = 'none'
+                if vsliver['vmac'] == 'none':
+                    #self.updatevmac(vsliver['vmac'])
+                    flag = 1
                 #self.updatevlanid(vsliver['slice_id'],vsliver['node_id'],vsliver['vlanid'])
                 break
-        vslivers.remove(vsliver)
+        if flag == 1:
+            vslivers.remove(vsliver)
         self.savevsliver(vslivers)
         return 0
+    @staticmethod
+    def FreeVmac(self,slice_id,node_id):
+        vslivers = self.loadvsliver()
+        flag = 0
+        for vsliver in vslivers[:]:
+            if vsliver['slice_id'] == slice_id and vsliver['node_id'] == node_id:
+                self.updatevmac(vsliver['vmac'])
+                vsliver['vmac'] = 'none'
+                if vsliver['vip'] == 'none':
+                    #self.updatevmac(vsliver['vmac'])
+                    flag = 1
+                #self.updatevlanid(vsliver['slice_id'],vsliver['node_id'],vsliver['vlanid'])
+                break
+        if flag == 1:
+            vslivers.remove(vsliver)
+        self.savevsliver(vslivers)
+        return 0
+
     @staticmethod
     def FreeVlanid(self,slice_id):
         vslivers = self.loadvsliver()
