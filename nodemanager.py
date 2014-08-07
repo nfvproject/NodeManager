@@ -279,9 +279,9 @@ class NodeManager:
             logger.log ("nodemanager: Create Virtual Router Error:", e)
  
     def rdeletesliver(self,sliver):
-        self.updatevip(sliver['vip'])
-        self.updatevmac(sliver['vmac'])
-        self.updatevlanid(sliver['vlanid'])
+        #self.updatevip(sliver['vip'])
+        #self.updatevmac(sliver['vmac'])
+        #self.updatevlanid(sliver['vlanid'])
         logfile = '/var/log/slice/log'
         #logger.logslice("rdeletesliver: sliceid-%s, vrouteid-%s, sliver['vip']-%s, sliver['vmac']-%s, sliver[vlanid]-%s"%(sliver['slice_id'], sliver['virouterid'], sliver['vip'], sliver['vmac'], sliver['vlanid']),logfile)
         logger.logslice("(sliceid: %s,vrouteid: %s,vip: %s,vmac:%s,vlanid:%s)  delete"%(sliver['slice_id'],sliver['vrname'],sliver['vip'],sliver['vmac'],sliver['vlanid']),logfile)
