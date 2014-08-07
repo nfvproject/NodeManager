@@ -44,7 +44,7 @@ class NodeManager:
     PEARL_DPID = 1
     NODE_ID = 32
 
-    PEARL_API_URL = "http://192.168.1.43:8080?wsdl"
+    PEARL_API_URL = "http://192.168.1.40:8080?wsdl"
     PEARL_DEFAULT_CONFIG = "/etc/planetlab/pearl_default_config.xml"
 
     # the modules in this directory that need to be run
