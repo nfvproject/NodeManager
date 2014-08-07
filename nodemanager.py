@@ -281,8 +281,8 @@ class NodeManager:
 
         """
         try:
-            self.pearl.service.creatVirtualMachine(vrp)
-            
+            vk=self.pearl.service.creatVirtualMachine(vrp)
+            logger.log ("nodemanager: vk is %s"%vk)
 	    logger.log ("nodemanager: Start Virtual Machine - begin")
             vm=self.pearl.service.startVirtualMachine(vrp.name)
             logger.log ("nodemanager: Start Virtual Machine - end")
