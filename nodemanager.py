@@ -248,6 +248,37 @@ class NodeManager:
         logger.log ("nodemanager:creatVirtualMachine")
  
         # create vm, and start it, get the [ip:port]
+        self.pearl.service.creatVirtualMachine(vrp)
+            
+	logger.log ("nodemanager: Start Virtual Machine - begin")
+        vm=self.pearl.service.startVirtualMachine(vrp.name)
+        logger.log ("nodemanager: Start Virtual Machine - end")
+        ipport = vm.split(':')
+        sliver['port'] = ipport[1]
+	logger.log ("nodemanager: Create Virtual Machine, vm - %s,ip:port - %s:%s" %(vrp.name, ipport[0], ipport[1]))
+        plc_port={}
+	plc_port['sliver_port']=int(sliver['port'])
+	plc_slice={}
+	plc_slice['node_id']=self.NODE_ID
+	plc_slice['slice_id']=sliver['slice_id']
+	plc.ReportSliverPort(plc_port,plc_slice)
+	logger.log ("nodemanager: Report sliver port, node_id - %s,slice_id - %s,port - %s" %(self.NODE_ID,sliver['slice_id'], ipport[1]))
+
+        # update the user keys to vm
+        vmname = 'vm_slice' + str(sliver['slice_id'])
+        vrname = 'vr_slice' + str(sliver['slice_id'])
+        for key in sliver['keys']:
+            #logger.log("nodemanager: keys %s"%(key['key']))
+            self.pearl.service.assignVirtualRouter(vrname, vmname, key['key'])
+        logger.log ("nodemanager: Assign Virtual Router for vm - %s, vr - %s" %(vmname, vrname))
+
+        vlanid = int(sliver['vlanid'])
+        pearl_config = self.loadPearlConfig()
+        logger.log ("nodemanager: Start Virtual Router vm - %s, vr - %s start" %(vmname, vrname))
+        self.pearl.service.startVirtualRouter(vrname, vmname, self.PEARL_DPID, vlanid, pearl_config)
+        logger.log ("nodemanager: Start Virtual Router vm - %s, vr - %s end" %(vmname, vrname))
+
+        """
         try:
             self.pearl.service.creatVirtualMachine(vrp)
             
@@ -280,7 +311,7 @@ class NodeManager:
             logger.log ("nodemanager: Start Virtual Router vm - %s, vr - %s end" %(vmname, vrname))
         except Exception as e:
             logger.log ("nodemanager: Create Virtual Router Error:", e)
- 
+        """
     def rdeletesliver(self,sliver):
         #self.updatevip(sliver['vip'])
         #self.updatevmac(sliver['vmac'])
