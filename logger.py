@@ -10,6 +10,7 @@ import pickle
 
 LOG_FILE    = '/var/log/nodemanager'
 LOG_SLIVERS = '/var/lib/nodemanager/getslivers.txt'
+LOG_MAP = '/var/lib/nodemanager/getmap.txt'
 LOG_DATABASE = '/var/lib/nodemanager/database.txt'
 LOG_MAP = '/var/log/slice/map.txt'
 LOG_ROUTER = '/var/log/slice/router.txt'
@@ -128,6 +129,8 @@ def log_map_in_file (data, file, message="",level=LOG_NODE):
 
 def log_slivers (data):
     log_data_in_file (data, LOG_SLIVERS, "raw GetSlivers")
+def log_map (data):
+    log_data_in_file (data, LOG_MAP, "raw GetMap")
 def log_database (db):
     log_data_in_file (db, LOG_DATABASE, "raw database")
 #wangyang

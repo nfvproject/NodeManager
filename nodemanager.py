@@ -361,7 +361,7 @@ class NodeManager:
             vrname = 'vr_' + str(sliver['slice_name'])
             for key in sliver['keys']:
                 self.pearl.service.assignVirtualRouter(vrname, vmname, key)
-            logger.log ("nodemanager: Assign Virtual Router %s" %(vrname))
+            logger.log ("nodemanager: Update Virtual Router %s" %(vrname))
         except Exception as e:
             logger.log ("nodemanager: Update Virtual Router Error:", e)
 
@@ -483,7 +483,7 @@ class NodeManager:
         logger.log ("nodemanager: saving successfully fetched slicemap in %s" % NodeManager.MAP_FILE)
         pickle.dump(slicemap, f)
         f.close()
-   
+        logger.log_map(slicemap)   
     #def savevlanid (self, vid):
     #    f = open(NodeManager.VLANID_FILE, "w")
     #    logger.log ("nodemanager: saving successfully vlan id in %s" % NodeManager.VLANID_FILE)
