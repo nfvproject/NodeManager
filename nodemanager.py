@@ -147,7 +147,7 @@ class NodeManager:
                      continue
                  slices['slice_name'] = sliver['name']
                  slices['slice_id'] = sliver['slice_id']
-                 slices['vrname'] = 0
+                 slices['vrname'] = 'vm_' + str(slices['slice_name'])
                  slices['status'] = 'none'
                  slices['port'] = 0
                  slices['keys'] = sliver['keys']
