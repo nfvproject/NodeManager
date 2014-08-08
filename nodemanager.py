@@ -214,7 +214,10 @@ class NodeManager:
                      self.rdeletesliver(sliver)
                      slicemapdb['slivers'].remove(sliver)
                  elif sliver['status'] == 'new':
-                     self.rcreatesliver(sliver,plc)
+                     flag = self.rcreatesliver(sliver,plc)
+                     if flag == 0:
+                         slicemapdb['slivers'].remove(sliver)
+                         logger.log ("nodemanager: Create this Virtual Router next time")
                  elif sliver['status'] == 'update':
                      self.rupdatesliver(sliver)
                  sliver['status'] = 'none'
@@ -245,7 +248,7 @@ class NodeManager:
         vrp.mac = sliver['vmac']
         vrp.disksize = 2
         logger.log ("nodemanager:vrp is %s"%vrp)
-        logger.log ("nodemanager:creatVirtualMachine")
+        logger.log ("nodemanager:prepare creatVirtualMachine")
         """
         # create vm, and start it, get the [ip:port]
         self.pearl.service.creatVirtualMachine(vrp)
@@ -280,6 +283,7 @@ class NodeManager:
         logger.log ("nodemanager: Start Virtual Router vm - %s, vr - %s end" %(vmname, vrname))
 
         """
+        flag = 0
         try:
             vk=self.pearl.service.creatVirtualMachine(vrp)
             logger.log ("nodemanager: vk is %s"%vk)
@@ -309,10 +313,14 @@ class NodeManager:
             pearl_config = self.loadPearlConfig()
             logger.log ("nodemanager: Start Virtual Router vm - %s, vr - %s start" %(vmname, vrname))
             self.pearl.service.startVirtualRouter(vrname, vmname, self.PEARL_DPID, vlanid, pearl_config)
+            flag =1
             logger.log ("nodemanager: Start Virtual Router vm - %s, vr - %s end" %(vmname, vrname))
         except Exception as e:
             logger.log ("nodemanager: Create Virtual Router Error:", e)
-        
+        if flag == 0:
+            logger.log ("nodemanager: Create Virtual Router Error:")
+            return 0
+        return 1
     def rdeletesliver(self,sliver):
         #self.updatevip(sliver['vip'])
         #self.updatevmac(sliver['vmac'])
