@@ -1,0 +1,3 @@
+IP_METHOD="dhcp"
+HOST_NAME="planetlabnode"
+DOMAIN_NAME="localhost"

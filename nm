@@ -1,0 +1,75 @@
+#!/bin/bash
+#
+# nm       Starts and stops Node Manager daemon
+#
+# chkconfig: 3 97 26
+# description: Starts and stops Node Manager daemon
+#
+
+# Source function library.
+. /etc/init.d/functions
+
+[ -f /etc/sysconfig/nodemanager ] && . /etc/sysconfig/nodemanager
+
+# Wait for libvirt to finish initializing
+sleep 10
+
+options=${OPTIONS-"-d"}
+# turn on verbosity
+verboseoptions=${DEBUGOPTIONS-"-v -d"}
+# debug mode is interactive, and has faster period 
+# run in deamon mode with service nm restardebug -d
+debugoptions=${DEBUGOPTIONS-"-v -p 30 -r 15"}
+
+nodemanager=${NODEMANAGER-"python /usr/share/NodeManager/nodemanager.py"}
+prog="Node Manager"
+pidfile=${PIDFILE-/var/run/nodemanager.pid}
+
+RETVAL=0
+
+function start() {
+    action $"Starting $prog: " daemon --pidfile=$pidfile --check=nodemanager $nodemanager "$@"
+}
+
+function stop() {
+    action $"Stopping $prog: " killproc -p $pidfile nodemanager
+}
+
+case "$1" in
+    start)
+	start $options
+	;;
+    stop)
+	stop
+	;;
+    status)
+	status -p $pidfile nodemanager
+	RETVAL=$?
+	;;
+    restart|reload)
+	shift
+	stop
+	start $options "$@"
+	;;
+    condrestart)
+	shift
+	[ -f ${pidfile} ] && { stop; start $options "$@"; }
+	;;
+    restartverbose)
+	shift
+	stop
+	$nodemanager $verboseoptions "$@"
+	;;
+    restartdebug)
+	shift
+	stop
+	echo "Restarting with $debugoptions $@ .."
+	$nodemanager $debugoptions "$@"
+	;;
+    *)
+	echo $"Usage: $0 {start|stop|status|restart|condrestart|restartdebug [-d]}"
+	exit 1
+	;;
+esac
+
+exit $RETVAL

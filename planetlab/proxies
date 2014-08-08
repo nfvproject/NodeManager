@@ -1,0 +1,12 @@
+#
+# /etc/planetlab/proxies
+#
+# post: service vnet restart
+#
+# Proxy (a.k.a. network telescope a.k.a. honeypot) interface configuration
+#
+# Aaron Klingaman <alk@cs.princeton.edu>
+# Mark Huang <mlhuang@cs.princeton.edu>
+# Copyright (C) 2004 The Trustees of Princeton University
+#
+
