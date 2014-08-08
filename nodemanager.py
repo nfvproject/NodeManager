@@ -217,6 +217,7 @@ class NodeManager:
                      flag = self.rcreatesliver(sliver,plc)
                      if flag == 0:
                          slicemapdb['slivers'].remove(sliver)
+                         self.rdeletesliver(sliver)
                          logger.log ("nodemanager: Create this Virtual Router next time")
                  elif sliver['status'] == 'update':
                      self.rupdatesliver(sliver)
