@@ -360,7 +360,8 @@ class NodeManager:
             vmname = sliver['vrname']
             vrname = 'vr_' + str(sliver['slice_name'])
             for key in sliver['keys']:
-                logger.logslice("Add key %s"%key,'/var/log/slice/keyadd')
+                logger.logslice("vmname is %s,vrname is %s"%(vmname,vrname),'/var/log/slice/keyadd')
+                logger.logslice("Add key %s"%key['key'],'/var/log/slice/keyadd')
                 self.pearl.service.assignVirtualRouter(vrname, vmname, key['key'])
             logger.log ("nodemanager: Update Virtual Router %s" %(vrname))
         except Exception as e:
