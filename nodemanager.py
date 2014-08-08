@@ -190,9 +190,9 @@ class NodeManager:
                           logger.logslice("keys: %s"%sliver['keys'],'/var/log/slice/key1')
                           logger.logslice("keys: %s"%sliverdb['keys'],'/var/log/slice/key2')
                           if sliverdb['keys'] != sliver['keys']:
+                              self.runassignsliver(sliverdb) # add by lihaitao, unassign all users, will update later
                               sliverdb['keys'] = sliver['keys']
                               sliverdb['status'] = 'update'
-                              self.runassignsliver(sliver) # add by lihaitao, unassign all users, will update later
                           else:
                               sliverdb['status'] = 'none'    
                           isnewslice = 0
@@ -360,6 +360,7 @@ class NodeManager:
             vmname = sliver['vrname']
             vrname = 'vr_' + str(sliver['slice_name'])
             for key in sliver['keys']:
+                logger.logslice("Add key %s"%key,'/var/log/slice/keyadd')
                 self.pearl.service.assignVirtualRouter(vrname, vmname, key)
             logger.log ("nodemanager: Update Virtual Router %s" %(vrname))
         except Exception as e:
