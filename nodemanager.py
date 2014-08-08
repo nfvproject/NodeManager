@@ -174,7 +174,7 @@ class NodeManager:
             vmname = sliver['vrname']
             vrname = 'vr_' + str(sliver['slice_name'])
             for key in sliver['keys']:
-                self.pearl.service.unassignVirtualRouter(vrname, vmname, key['key'])
+                self.pearl.service.unassignVirtualRouter(vmname, key['key'])
             logger.log ("nodemanager: Unassign Virtual Router %s" %(vrname))
         except Exception as e:
             logger.log ("nodemanager: Unassign Virtual Router Error:", e)
