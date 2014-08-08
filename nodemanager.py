@@ -483,7 +483,7 @@ class NodeManager:
         logger.log ("nodemanager: saving successfully fetched slicemap in %s" % NodeManager.MAP_FILE)
         pickle.dump(slicemap, f)
         f.close()
-        logger.log_map(slicemap)   
+        logger.log_slicemap(slicemap)   
     #def savevlanid (self, vid):
     #    f = open(NodeManager.VLANID_FILE, "w")
     #    logger.log ("nodemanager: saving successfully vlan id in %s" % NodeManager.VLANID_FILE)
