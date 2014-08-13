@@ -116,6 +116,8 @@ class NodeManager:
         self.PEARL_DPID = node_config.PEARL_DPID
         self.NODE_ID = node_config.NODE_ID
         self.PEARL_API_URL = node_config.PEARL_API_URL
+        logger.log("PEARL API is %s"%self.PEARL_API_URL)
+        logger.log("node id is %s"%self.NODE_ID)
         # Init PEARL-API client
         self.pearl = Client(self.PEARL_API_URL)
         logger.log("Init PEARL-API Client")
