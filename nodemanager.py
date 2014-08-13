@@ -394,6 +394,25 @@ class NodeManager:
             logger.log_slivers(data)
             logger.verbose("nodemanager: Sync w/ PLC done")
             #last_data=data
+            logger.log("*************************************************")
+            logger.log("we should provide these information to PEARL TEAM")
+            logger.log_map({},"******************************************")
+            #wangyang,get slice map from date fetched from myplc
+            slicemap = self.getslicemap(data)
+            logger.log_map(slicemap,"slicemap")
+            #wangyang,get slice map from db
+            slicemapdb = self.loadmap(slicemap)
+            logger.log_map(slicemapdb,"slicedb")
+            #wangyang,compare two files
+            slicemapdb = self.handlemap(slicemap,slicemapdb)
+            logger.log_map(slicemapdb,"dbafter compare")
+            #wangyang,update to router 
+            slicemapdb = self.updatetoRouter(slicemapdb,plc)
+            logger.log_map(slicemapdb,"db after update")
+            #wangyang,update to router
+            self.savemap(slicemapdb)
+            #wangyang,write into txt
+            logger.log_map(slicemapdb,"write to db")
         except:
             logger.log_exc("nodemanager: failed in GetSlivers")
             #  XXX So some modules can at least boostrap.
@@ -401,25 +420,7 @@ class NodeManager:
             data = {}
             # for modules that request it though the 'persistent_data' property
             #last_data=self.loadSlivers()
-        logger.log("*************************************************")
-        logger.log("we should provide these information to PEARL TEAM")
-        logger.log_map({},"******************************************")
-        #wangyang,get slice map from date fetched from myplc
-        slicemap = self.getslicemap(data)
-        logger.log_map(slicemap,"slicemap")
-        #wangyang,get slice map from db
-        slicemapdb = self.loadmap(slicemap)
-        logger.log_map(slicemapdb,"slicedb")
-        #wangyang,compare two files
-        slicemapdb = self.handlemap(slicemap,slicemapdb)
-        logger.log_map(slicemapdb,"dbafter compare")
-        #wangyang,update to router 
-        slicemapdb = self.updatetoRouter(slicemapdb,plc)
-        logger.log_map(slicemapdb,"db after update")
-        #wangyang,update to router
-        self.savemap(slicemapdb)
-        #wangyang,write into txt
-        logger.log_map(slicemapdb,"write to db")
+
         '''
         for sliver in last_data['slivers']:
             logger.log("sliceid is %s"%sliver['slice_id'])
