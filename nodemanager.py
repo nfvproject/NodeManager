@@ -27,7 +27,7 @@ from config import Config
 from plcapi import PLCAPI
 
 from suds.client import Client
-
+from node_config import Node_Config
 class NodeManager:
 
     PLUGIN_PATH = "/usr/share/NodeManager/plugins"
@@ -41,11 +41,13 @@ class NodeManager:
     VIP_FILE = "/var/lib/nodemanager/vip.pickle"
     VMAC_FILE = "/var/lib/nodemanager/vmac.pickle"
     VLANID_FILE = "/var/lib/nodemanager/vlanid.pickle"
-    PEARL_DPID = 1
-    NODE_ID = 32
-
-    PEARL_API_URL = "http://192.168.1.40:8080?wsdl"
+    
     PEARL_DEFAULT_CONFIG = "/etc/planetlab/pearl_default_config.xml"
+    #PEARL_DPID = 1
+    #NODE_ID = 32
+
+    #PEARL_API_URL = "http://192.168.1.40:8080?wsdl"
+    #PEARL_DEFAULT_CONFIG = "/etc/planetlab/pearl_default_config.xml"
 
     # the modules in this directory that need to be run
     # NOTE: modules listed here will also be loaded in this order
@@ -110,7 +112,10 @@ class NodeManager:
             logger.verbose('nodemanager: Running single module %s'%self.options.user_module)
         '''
         logger.logslice("modules:%s"%self.modules,'/var/log/slice/module')
-
+        node_config = Node_Config()
+        self.PEARL_DPID = node_config.PEARL_DPID
+        self.NODE_ID = node_config.NODE_ID
+        self.PEARL_API_URL = node_config.PEARL_API_URL
         # Init PEARL-API client
         self.pearl = Client(self.PEARL_API_URL)
         logger.log("Init PEARL-API Client")
@@ -120,42 +125,44 @@ class NodeManager:
         slicemap = {}
         slivers = []
 
-        for sliver in last_data['slivers']:
-             slices = {}
-             if sliver['slice_id'] > 4:
-                 logfile = '/var/log/slice/getmap'              
-                 logger.logslice("---get slice %s from myplc"%sliver['slice_id'],logfile)
+        try:
+            for sliver in last_data['slivers']:
+                slices = {}
+                if sliver['slice_id'] > 4:
+                    logfile = '/var/log/slice/getmap'              
+                    logger.logslice("---get slice %s from myplc"%sliver['slice_id'],logfile)
                  #wangyang,what things do we need to focus on , add them here!After this ,we should delete the db file(*.pickle)
                  #wangyang,get vlanid from myplc,vlanid of slivers in one slice should be same 
                  #wangyang,get vip and vmac from myplc,vip and vmac of slivers in one slice should be different,just a global controller can make sure of this. 
-                 sliver_check = 0
-                 for tag in sliver['attributes']:
-                     if tag['tagname']=='vsys_vnet':
-                         slices['vlanid'] = tag['value']
-                         logger.logslice("*get vlanid %s "%slices['vlanid'],logfile)
-                         sliver_check += 1
-                     if tag['tagname']=='sliver_ip':
-                         slices['vip'] = tag['value']
-                         logger.logslice("*get vip %s "%slices['vip'],logfile)
-                         sliver_check += 1
-                     if tag['tagname']=='sliver_mac':
-                         slices['vmac'] = tag['value']
-                         logger.logslice("*get vmac %s "%slices['vmac'],logfile)
-                         sliver_check += 1
-                 if sliver_check<3:
-                     logger.logslice("*slice %s check failed,as no vlanid,vmac or vip"%slivers,logfile)
-                     continue
-                 slices['slice_name'] = sliver['name']
-                 slices['slice_id'] = sliver['slice_id']
-                 slices['vrname'] = 'vm_' + str(slices['slice_name'])
-                 slices['status'] = 'none'
-                 slices['port'] = 0
-                 slices['keys'] = sliver['keys']
-                 slivers.append(slices)                      
-                 logger.logslice("---get slice %s successfully,"%slivers,logfile)
-        slicemap['slivers'] = slivers
-        return slicemap
-
+                    sliver_check = 0
+                    for tag in sliver['attributes']:
+                        if tag['tagname']=='vsys_vnet':
+                            slices['vlanid'] = tag['value']
+                            logger.logslice("*get vlanid %s "%slices['vlanid'],logfile)
+                            sliver_check += 1
+                        if tag['tagname']=='sliver_ip':
+                            slices['vip'] = tag['value']
+                            logger.logslice("*get vip %s "%slices['vip'],logfile)
+                            sliver_check += 1
+                        if tag['tagname']=='sliver_mac':
+                            slices['vmac'] = tag['value']
+                            logger.logslice("*get vmac %s "%slices['vmac'],logfile)
+                            sliver_check += 1
+                    if sliver_check<3:
+                        logger.logslice("*slice %s check failed,as no vlanid,vmac or vip"%slivers,logfile)
+                        continue
+                    slices['slice_name'] = sliver['name']
+                    slices['slice_id'] = sliver['slice_id']
+                    slices['vrname'] = 'vm_' + str(slices['slice_name'])
+                    slices['status'] = 'none'
+                    slices['port'] = 0
+                    slices['keys'] = sliver['keys']
+                    slivers.append(slices)                      
+                    logger.logslice("---get slice %s successfully,"%slivers,logfile)
+            slicemap['slivers'] = slivers
+            return slicemap
+        except:
+            return slicemap
     def loadPearlConfig(self):
         pearl_conf_file = open(self.PEARL_DEFAULT_CONFIG)
         pearl_confs = pearl_conf_file.readlines()

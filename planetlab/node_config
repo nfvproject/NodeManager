@@ -1,0 +1,5 @@
+#!/bin/sh
+PEARL_API_URL = "http://192.168.1.40:8080?wsdl"
+PEARL_DPID = 1
+NODE_ID = 99
+
