@@ -119,8 +119,11 @@ class NodeManager:
         logger.log("PEARL API is %s"%self.PEARL_API_URL)
         logger.log("node id is %s"%self.NODE_ID)
         # Init PEARL-API client
-        self.pearl = Client(self.PEARL_API_URL)
-        logger.log("Init PEARL-API Client")
+        try:
+            self.pearl = Client(self.PEARL_API_URL)
+            logger.log("Init PEARL-API Client")
+        except:
+            logger.log("Connect PEARL-API Client failed")
 
     #wangyang,get slice map from date fetched from myplc
     def getslicemap(self,last_data):
